@@ -127,6 +127,10 @@ h1,h2,h3{font-family:'Montserrat',Arial,sans-serif}
 .pasta-btn{display:block;text-align:center;background:var(--az);color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:8px;border-radius:6px;text-decoration:none;font-family:'Montserrat',sans-serif}
 .pasta-btn.disabled{background:#ccc;pointer-events:none}
 
+.rodape{background:var(--aze);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:30px}
+.rodape-texto{color:rgba(255,255,255,.55);font-size:11px}
+.rodape-badge{background:var(--am);color:var(--az);padding:6px 16px;border-radius:20px;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-family:'Montserrat',sans-serif}
+
 @media(max-width:900px){.g4{grid-template-columns:repeat(2,1fr)}.g6{grid-template-columns:repeat(3,1fr)}.hnav{display:none}.pasta-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.g4{grid-template-columns:1fr}.g6{grid-template-columns:repeat(2,1fr)}.pasta-grid{grid-template-columns:1fr}}
 </style>
@@ -213,6 +217,11 @@ h1,h2,h3{font-family:'Montserrat',Arial,sans-serif}
       <input class="busca" id="busca-pasta" placeholder="Buscar pasta por núcleo ou turma..." oninput="renderizarPastas()">
       <div id="lista-pastas"></div>
     </div>
+  </div>
+
+  <div class="rodape">
+    <div class="rodape-texto">Jogando Juntos pela Cidadania - Instituto BR Arte x Ministério do Esporte - 18 meses - 16 territórios</div>
+    <div class="rodape-badge">Monitoramento Operacional</div>
   </div>
 </div>
 
