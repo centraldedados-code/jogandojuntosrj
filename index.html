@@ -214,6 +214,7 @@ h1,h2,h3{font-family:'Montserrat',Arial,sans-serif}
     <div class="vw" id="vw-pastas">
       <div class="st">Pastas de Turma no Drive</div>
       <div class="tmeta" style="margin-bottom:14px">Clique em ABRIR PASTA para acessar a pasta da turma no Google Drive.</div>
+      <div id="link-cards-comunicacao"></div>
       <input class="busca" id="busca-pasta" placeholder="Buscar pasta por núcleo ou turma..." oninput="renderizarPastas()">
       <div id="lista-pastas"></div>
     </div>
@@ -233,17 +234,13 @@ var SENHA_ACESSO = 'Brarte@2026';
 
 var STATUS_KEYS = [
   'Status Fichas de Inscrição', 'Status Listas de Presença', 'Status Fotos',
-  'Status Vídeos', 'Status Certificados', 'Status Materiais Didáticos',
-  'Status Cards de Divulgação'
+  'Status Vídeos'
 ];
 var STATUS_LABELS = {
   'Status Fichas de Inscrição': 'Fichas',
   'Status Listas de Presença': 'Presença',
   'Status Fotos': 'Fotos',
-  'Status Vídeos': 'Vídeos',
-  'Status Certificados': 'Certificados',
-  'Status Materiais Didáticos': 'Materiais',
-  'Status Cards de Divulgação': 'Cards'
+  'Status Vídeos': 'Vídeos'
 };
 
 var DADOS = null;
@@ -449,6 +446,20 @@ function renderizarMetas() {
 // PASTAS DRIVE - grade por nucleo, uma pasta por turma, com badge
 // -------------------------------------------------------------------
 function renderizarPastas() {
+  var linksGerais = [
+    ['Cards de Comunicação', DADOS.config && DADOS.config.LINK_PASTA_CARDS_COMUNICACAO],
+    ['Materiais Esportivos', DADOS.config && DADOS.config.LINK_PASTA_MATERIAIS_ESPORTIVOS],
+    ['Identidade Visual', DADOS.config && DADOS.config.LINK_PASTA_IDENTIDADE_VISUAL],
+    ['Kit Documental', DADOS.config && DADOS.config.LINK_PASTA_KIT_DOCUMENTAL]
+  ];
+  var blocosGerais = linksGerais
+    .filter(function (item) { return item[1]; })
+    .map(function (item) {
+      return '<div class="pasta-territorio-box" style="margin-bottom:14px"><div class="pasta-territorio-titulo">' + item[0] + ' (pasta geral do projeto)</div>' +
+        '<a class="pasta-btn" style="max-width:220px" href="' + item[1] + '" target="_blank">Abrir Pasta</a></div>';
+    }).join('');
+  document.getElementById('link-cards-comunicacao').innerHTML = blocosGerais;
+
   var filtro = (document.getElementById('busca-pasta').value || '').toLowerCase();
   var turmas = DADOS.atividades.filter(function (t) {
     if (!filtro) return true;
