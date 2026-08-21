@@ -3,144 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jogando Juntos pela Cidadania | Instituto BR Arte</title>
+<title>Jogando Juntos pela Cidadania | Monitoramento</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap');
 :root{
-  --az:#092040;--azs:#00B7D7;--am:#ECC203;--cz:#EFF1F3;--aze:#021738;
-  --verde:#0B6B3A;--verdebg:#D9F2E6;--amarelo:#8A6D00;--amarelobg:#FFF3CD;--verm:#B00020;--vermbg:#FBE1E1;
+  --az:#092040;--azs:#00B7D7;--am:#ECC203;
+  --cz:#EFF1F3;--es:#021738;--br:#FFFFFF;
+  --gv:#1A6B3C;--gvb:#ebf7eb;
+  --aw:#7A4F00;--awb:#fff8e0;
+  --rd:#8B1A1A;--rdb:#fce8e8;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Open Sans',Arial,sans-serif;background:var(--cz);color:var(--az);min-height:100vh}
-h1,h2,h3{font-family:'Montserrat',Arial,sans-serif}
+body{font-family:'Open Sans',Arial,sans-serif;background:var(--cz);color:var(--es);min-height:100vh}
+h1,h2,h3,h4{font-family:'Montserrat',Arial,sans-serif}
 
-/* TELA DE SENHA */
-#pwd{position:fixed;inset:0;background:var(--aze);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:99}
-.pbox{background:#fff;border-radius:16px;padding:40px 32px;max-width:360px;width:90%;text-align:center;display:flex;flex-direction:column;gap:14px}
-.plogo-chip img{max-height:80px;object-fit:contain}
-.psub2{font-size:13px;color:#666}
-.phint{font-size:11px;color:#999}
-.pin{padding:12px 14px;border-radius:8px;border:1.5px solid #ddd;font-size:14px}
-.pbtn{background:var(--azs);color:#fff;border:none;border-radius:8px;padding:12px;font-weight:700;font-family:'Montserrat',sans-serif;cursor:pointer}
-.perr{color:#c0392b;font-size:12px;min-height:14px}
-.pfoot-logo{height:26px;object-fit:contain;filter:brightness(0) invert(1);opacity:.7}
+/* SENHA */
+#pwd{position:fixed;inset:0;z-index:9999;background:var(--az);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+#pwd.off{display:none}
+.pbox{background:var(--br);border-radius:16px;padding:36px 40px;max-width:420px;width:100%;text-align:center}
+.plogo-main{height:64px;object-fit:contain;display:block;margin:0 auto 22px}
+.pfoot-logo{height:56px;object-fit:contain;display:block;margin:28px auto 0;filter:brightness(0) invert(1);opacity:.85}
+.psub{color:var(--am);font-size:11px;font-weight:700;letter-spacing:2px;margin-bottom:6px;text-transform:uppercase;font-family:'Montserrat',sans-serif}
+.phint{font-size:12px;color:#999;margin-bottom:20px}
+.pin{width:100%;padding:12px 16px;border:2px solid #dde4ee;border-radius:10px;font-size:15px;letter-spacing:2px;font-family:'Open Sans',sans-serif;color:var(--az);outline:none;transition:border-color .2s;margin-bottom:12px}
+.pin:focus{border-color:var(--azs)}
+.pbtn{width:100%;padding:13px;background:var(--az);color:var(--am);border:none;border-radius:10px;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background .2s}
+.pbtn:hover{background:var(--azs);color:var(--br)}
+.perr{color:#cc0000;font-size:12px;margin-top:8px;min-height:18px}
 
 /* LOADING */
-#ld{position:fixed;inset:0;background:var(--cz);display:none;align-items:center;justify-content:center;flex-direction:column;gap:14px;z-index:98}
-.spin{width:36px;height:36px;border:4px solid #ddd;border-top-color:var(--azs);border-radius:50%;animation:sp 1s linear infinite}
-@keyframes sp{to{transform:rotate(360deg)}}
-.ltxt{font-size:13px;color:#666}
+#ld{display:none;position:fixed;inset:0;z-index:500;background:var(--cz);align-items:center;justify-content:center;flex-direction:column;gap:16px}
+#ld.on{display:flex}
+.spin{width:48px;height:48px;border:4px solid var(--azs);border-top-color:var(--am);border-radius:50%;animation:giro .8s linear infinite}
+@keyframes giro{to{transform:rotate(360deg)}}
+.ltxt{font-family:'Montserrat',sans-serif;font-weight:700;color:var(--az);font-size:14px}
 
 /* APP */
 #app{display:none}
-.hdr{background:var(--aze);padding:14px 24px;border-bottom:2px solid var(--am)}
-.hdri{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
-.hlogo{height:34px;object-fit:contain}
-.htit{color:var(--am);font-size:14px;font-weight:800;letter-spacing:.5px;font-family:'Montserrat',sans-serif}
-.hsub{color:rgba(255,255,255,.55);font-size:10px}
-.hnav{display:flex;gap:4px;flex-wrap:wrap}
-.nbtn{background:transparent;border:none;color:rgba(255,255,255,.6);padding:8px 13px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.3px;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase}
-.nbtn:hover{color:#fff}
-.nbtn.on{background:var(--am);color:var(--az)}
+#app.on{display:block}
 
-.wrap{max-width:1280px;margin:0 auto;padding:24px 16px 48px}
-.st{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:26px 0 14px;padding-left:10px;border-left:4px solid var(--azs);color:var(--az)}
-.vw{display:none}.vw.on{display:block}
+/* HEADER */
+.hdr{background:var(--az);position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.3)}
+.hdri{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 24px;gap:16px}
+.hlogo{height:42px;object-fit:contain;background:var(--br);border-radius:8px;padding:5px 12px}
+.hdiv{width:1px;height:32px;background:rgba(255,255,255,.2)}
+.htit{color:var(--am);font-size:15px;font-weight:700;letter-spacing:.5px;font-family:'Montserrat',sans-serif}
+.hsub{color:rgba(255,255,255,.5);font-size:11px;margin-top:2px}
+.hnav{display:flex;gap:4px}
+.nbtn{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.6);font-size:11px;font-weight:700;letter-spacing:.5px;padding:8px 12px;border-radius:8px;text-transform:uppercase;transition:all .2s;font-family:'Montserrat',sans-serif}
+.nbtn:hover{color:var(--br);background:rgba(255,255,255,.1)}
+.nbtn.on{color:var(--am);background:rgba(236,194,3,.15)}
 
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.g6{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
-.kcard{background:var(--az);border-radius:10px;padding:18px}
-.kval{font-size:26px;font-weight:800;color:var(--am);font-family:'Montserrat',sans-serif}
-.klabel{font-size:10px;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.wrap{max-width:1200px;margin:0 auto;padding:24px 16px}
+.vw{display:none}
+.vw.on{display:block}
+.st{font-size:11px;font-weight:700;color:var(--az);text-transform:uppercase;letter-spacing:1.5px;margin:22px 0 12px;padding-left:10px;border-left:4px solid var(--azs);font-family:'Montserrat',sans-serif}
 
-/* INDICE GLOBAL */
-.indice-box{background:#fff;border-radius:10px;padding:18px 20px;border:1.5px solid #e3e3ec}
-.indice-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
-.indice-titulo{font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:var(--az)}
-.indice-sub{font-size:11px;color:#888;margin-top:2px}
-.indice-pct{font-size:24px;font-weight:800;color:var(--azs);font-family:'Montserrat',sans-serif}
-.indice-bar-wrap{width:100%;height:10px;background:#eee;border-radius:5px;overflow:hidden;margin-top:12px}
-.indice-bar{height:100%;border-radius:5px}
+.kpi{background:var(--az);border-radius:12px;padding:18px;text-align:center}
+.knum{color:var(--am);font-size:26px;font-weight:700;font-family:'Montserrat',sans-serif}
+.klab{color:rgba(255,255,255,.65);font-size:11px;margin-top:4px}
+
+.sbw{background:#dde4ee;border-radius:999px;overflow:hidden}
+.sb{border-radius:999px;transition:width 1.2s ease;height:100%}
+.shi{background:var(--gv)}.smid{background:var(--azs)}.slow{background:#c9940a}.scrit{background:#cc2222}
+
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;font-family:'Montserrat',sans-serif}
+.bR{background:var(--gvb);color:var(--gv)}
+.bE{background:#e0f7fb;color:#006080}
+.bC{background:var(--rdb);color:var(--rd)}
+
+.card{background:var(--br);border:1.5px solid #dde4ee;border-radius:12px;padding:16px 18px}
+
+.tcard{background:var(--br);border:1.5px solid #dde4ee;border-radius:14px;padding:20px;cursor:pointer;transition:border-color .18s,transform .18s,box-shadow .18s}
+.tcard:hover{border-color:var(--azs);transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,183,215,.15)}
+.tnome{font-size:13px;font-weight:700;color:var(--az);margin-bottom:10px;font-family:'Montserrat',sans-serif}
+.tsc{font-size:30px;font-weight:700;color:var(--azs);font-family:'Montserrat',sans-serif}
+.tmeta{font-size:11px;color:#666;margin-top:2px}
+.tlink{color:var(--azs);font-size:11px;font-weight:700;margin-top:12px;display:block;font-family:'Montserrat',sans-serif}
+
+.oscard{background:var(--br);border:1.5px solid #dde4ee;border-radius:10px;padding:14px;transition:border-color .18s,box-shadow .18s}
+.oscard:hover{border-color:var(--azs);box-shadow:0 4px 12px rgba(0,183,215,.12)}
+.oscard.stR{border-left:4px solid var(--gv)}
+.oscard.stE{border-left:4px solid #006080}
+.oscard.stC{border-left:4px solid var(--rd)}
+.osnome{font-size:12px;font-weight:700;color:var(--az);font-family:'Montserrat',sans-serif}
+.osfase{font-size:10px;color:#999;margin:3px 0 8px}
+.oslink{font-size:11px;color:var(--azs);font-weight:700;margin-top:8px;display:block;text-decoration:none}
+.obs-alerta{font-size:10.5px;color:var(--aw);background:var(--awb);border-radius:6px;padding:6px 10px;margin-top:8px}
+
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{background:var(--az);color:var(--br);padding:10px 12px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;font-family:'Montserrat',sans-serif}
+.tbl td{padding:10px 12px;border-bottom:1px solid #eee;vertical-align:middle}
+.tbl tr:hover td{background:#f8fafc}
+.tbl a{color:var(--azs);text-decoration:none;font-weight:700}
+.tbl a:hover{text-decoration:underline}
+
+.abox{background:#e0f7fb;border:1px solid #b8ecf5;border-radius:10px;padding:14px 18px;margin-bottom:12px}
+.atit{font-weight:700;color:#006080;font-size:13px;margin-bottom:4px;font-family:'Montserrat',sans-serif}
+
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+
+.back{background:none;border:2px solid var(--az);color:var(--az);font-size:11px;font-weight:700;letter-spacing:.5px;padding:8px 16px;border-radius:8px;cursor:pointer;text-transform:uppercase;transition:all .2s;margin-bottom:20px;font-family:'Montserrat',sans-serif}
+.back:hover{background:var(--az);color:var(--br)}
 
 .busca{width:100%;padding:12px 14px;border-radius:8px;border:1.5px solid #ddd;font-size:14px;margin-bottom:18px;font-family:'Open Sans',sans-serif}
 
-/* BADGES */
-.badge{font-size:9px;font-weight:800;padding:4px 9px;border-radius:4px;text-transform:uppercase;letter-spacing:.4px;display:inline-block}
-.badge.pendente{background:var(--vermbg);color:var(--verm)}
-.badge.andamento{background:var(--amarelobg);color:var(--amarelo)}
-.badge.concluido{background:var(--verdebg);color:var(--verde)}
+.pcard{background:var(--br);border:1.5px solid #dde4ee;border-radius:12px;padding:16px 18px;transition:border-color .18s,transform .18s,box-shadow .18s;display:flex;flex-direction:column;gap:8px}
+.pcard:hover{border-color:var(--azs);transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,183,215,.14)}
+.pcard.stR{border-left:4px solid var(--gv)}
+.pcard.stE{border-left:4px solid #006080}
+.pcard.stC{border-left:4px solid var(--rd)}
+.pcard-os{font-size:12px;font-weight:700;color:var(--az);font-family:'Montserrat',sans-serif}
+.pcard-ativ{font-size:10px;color:#999}
+.pcard-btn{display:inline-block;background:var(--az);color:var(--am);font-size:10px;font-weight:700;letter-spacing:.5px;padding:7px 14px;border-radius:8px;text-decoration:none;text-align:center;font-family:'Montserrat',sans-serif;transition:background .18s;margin-top:4px}
+.pcard-btn:hover{background:var(--azs);color:var(--br)}
+.pcard-btn.vazia{background:#dde4ee;color:#999;cursor:default;pointer-events:none}
+.pterr-grupo{margin-bottom:28px}
+.pterr-nome{font-size:13px;font-weight:700;color:var(--br);background:var(--az);padding:10px 16px;border-radius:10px 10px 0 0;font-family:'Montserrat',sans-serif;letter-spacing:.3px}
+.pterr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:var(--br);border:1.5px solid #dde4ee;border-top:none;border-radius:0 0 10px 10px;padding:14px}
+@media(max-width:900px){.pterr-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.pterr-grid{grid-template-columns:repeat(2,1fr)}}
 
-/* CARDS DE TERRITORIO (mini, dashboard) */
-.terr-mini{background:#fff;border-radius:10px;padding:16px;border:1.5px solid #e3e3ec}
-.terr-mini-nome{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--az)}
-.terr-mini-pct{font-size:20px;font-weight:800;color:var(--azs);font-family:'Montserrat',sans-serif;margin:4px 0}
-.mini-bar-wrap{width:100%;height:6px;background:#eee;border-radius:3px;overflow:hidden;margin:6px 0 8px}
-.mini-bar{height:100%;background:var(--azs)}
+.foot{background:var(--az);border-radius:12px;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;margin-top:32px;flex-wrap:wrap;gap:10px}
+.ftxt{color:rgba(255,255,255,.45);font-size:11px}
+.fbadge{background:var(--am);color:var(--az);font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;font-family:'Montserrat',sans-serif}
 
-/* CARDS DE TERRITORIO (grade, aba Territorios) */
-.tcard{background:#fff;border-radius:12px;border:1.5px solid #e3e3ec;margin-bottom:12px;overflow:hidden}
-.thead{padding:16px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:12px;flex-wrap:wrap}
-.thead:hover{background:#fafbfc}
-.tnome{font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;color:var(--az)}
-.tmeta{font-size:11px;color:#888}
-.tbar-wrap{width:120px;height:8px;background:#eee;border-radius:4px;overflow:hidden}
-.tbar{height:100%;background:var(--azs)}
-.tpct{font-size:12px;font-weight:700;color:var(--az);width:38px;text-align:right}
-.tbody{display:none;padding:0 18px 16px;border-top:1px solid #f0f0f0}
-.tbody.on{display:block}
-
-.turma-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f4f4f4;flex-wrap:wrap;gap:8px}
-.turma-row:last-child{border-bottom:none}
-.turma-nome{font-weight:600;font-size:13px}
-.turma-info{font-size:11px;color:#888}
-.chips{display:flex;gap:4px;flex-wrap:wrap}
-.chip{font-size:9px;font-weight:700;padding:3px 7px;border-radius:10px;text-transform:uppercase;letter-spacing:.3px}
-.chip.completo{background:var(--verdebg);color:var(--verde)}
-.chip.parcial{background:var(--amarelobg);color:var(--amarelo)}
-.chip.pendente{background:var(--vermbg);color:var(--verm)}
-.tlink{font-size:11px;color:var(--azs);text-decoration:none;font-weight:600}
-
-.mcard{background:#fff;border-radius:12px;padding:16px 18px;border:1.5px solid #e3e3ec;margin-bottom:10px}
-.mcodigo{font-size:10px;font-weight:700;color:var(--azs);letter-spacing:1px}
-.mdesc{font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;margin:4px 0}
-.mnums{display:flex;gap:18px;margin-top:6px}
-.mnum{font-size:12px;color:#666}
-.mnum b{color:var(--az)}
-.mobs{font-size:11px;color:#999;margin-top:6px;font-style:italic}
-
-/* ALERTAS */
-.alerta-box{background:var(--vermbg);border:1.5px solid #f3b9b9;border-radius:10px;padding:14px 18px;font-size:12px;color:var(--verm);font-weight:700;margin-bottom:14px}
-.alerta-tabela{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden;border:1.5px solid #e3e3ec}
-.alerta-tabela th{background:var(--cz);text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:#888;padding:10px 14px}
-.alerta-tabela td{padding:10px 14px;font-size:12px;border-top:1px solid #f0f0f0}
-
-/* PASTAS DRIVE - grade por territorio */
-.pasta-territorio-box{background:var(--az);border-radius:10px;padding:16px 18px;margin-bottom:16px}
-.pasta-territorio-titulo{color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;margin-bottom:12px}
-.pasta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.pasta-card{background:#fff;border-radius:8px;padding:12px 14px;border-left:4px solid var(--verm)}
-.pasta-card.andamento{border-left-color:var(--amarelo)}
-.pasta-card.concluido{border-left-color:var(--verde)}
-.pasta-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:6px;margin-bottom:4px}
-.pasta-card-nome{font-weight:700;font-size:12px;color:var(--az)}
-.pasta-card-info{font-size:10px;color:#999;margin-bottom:10px}
-.pasta-btn{display:block;text-align:center;background:var(--az);color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:8px;border-radius:6px;text-decoration:none;font-family:'Montserrat',sans-serif}
-.pasta-btn.disabled{background:#ccc;pointer-events:none}
-
-.rodape{background:var(--aze);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:30px}
-.rodape-texto{color:rgba(255,255,255,.55);font-size:11px}
-.rodape-badge{background:var(--am);color:var(--az);padding:6px 16px;border-radius:20px;font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-family:'Montserrat',sans-serif}
-
-@media(max-width:900px){.g4{grid-template-columns:repeat(2,1fr)}.g6{grid-template-columns:repeat(3,1fr)}.hnav{display:none}.pasta-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.g4{grid-template-columns:1fr}.g6{grid-template-columns:repeat(2,1fr)}.pasta-grid{grid-template-columns:1fr}}
+@media(max-width:900px){.g4,.g3{grid-template-columns:repeat(2,1fr)}.hnav{display:none}}
+@media(max-width:480px){.g4,.g3{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
 <div id="pwd">
   <div class="pbox">
-    <div class="plogo-chip"><img src="assets/logo-jogando-juntos.png" alt="Jogando Juntos pela Cidadania"></div>
-    <div class="psub2">Sistema de Monitoramento Operacional</div>
+    <img class="plogo-main" src="assets/logo-jogando-juntos.png" alt="Jogando Juntos pela Cidadania">
+    <div class="psub">Sistema de Monitoramento Operacional</div>
     <div class="phint">Acesso restrito - Coordenação Instituto BR Arte</div>
     <input class="pin" type="password" id="pf" placeholder="Senha de acesso"
            onkeydown="if(event.key==='Enter')chkPwd()">
@@ -158,8 +156,9 @@ h1,h2,h3{font-family:'Montserrat',Arial,sans-serif}
 <div id="app">
   <header class="hdr">
     <div class="hdri">
-      <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;align-items:center;gap:16px">
         <img class="hlogo" src="assets/logo-jogando-juntos.png" alt="Jogando Juntos pela Cidadania">
+        <div class="hdiv"></div>
         <div>
           <div class="htit">JOGANDO JUNTOS PELA CIDADANIA</div>
           <div class="hsub">Sistema de Monitoramento Operacional</div>
@@ -167,7 +166,7 @@ h1,h2,h3{font-family:'Montserrat',Arial,sans-serif}
       </div>
       <nav class="hnav">
         <button class="nbtn on" onclick="goV('dashboard')">Dashboard</button>
-        <button class="nbtn" onclick="goV('territorios')">Territórios</button>
+        <button class="nbtn" onclick="goV('territorios')">Núcleos</button>
         <button class="nbtn" onclick="goV('metas')">Metas</button>
         <button class="nbtn" onclick="goV('pastas')">Pastas Drive</button>
       </nav>
@@ -175,35 +174,41 @@ h1,h2,h3{font-family:'Montserrat',Arial,sans-serif}
   </header>
 
   <div class="wrap">
+
     <div class="vw on" id="vw-dashboard">
       <div class="st">Visão Geral do Projeto</div>
-      <div class="g4" id="kpi-row"></div>
+      <div class="g4" id="kpi-row" style="margin-bottom:20px"></div>
 
       <div class="st">Índice Global de Execução</div>
-      <div class="indice-box">
-        <div class="indice-top">
+      <div class="card" style="padding:22px 26px;margin-bottom:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:16px;flex-wrap:wrap">
           <div>
-            <div class="indice-titulo">Jogando Juntos pela Cidadania - 16 Núcleos - 174 Turmas Confirmadas</div>
-            <div class="indice-sub">Percentual de turmas com as 7 evidências completas</div>
+            <div style="font-family:Montserrat,sans-serif;font-size:14px;font-weight:700;color:var(--az)">Jogando Juntos pela Cidadania - 16 Núcleos - 174 Turmas Confirmadas</div>
+            <div style="font-size:11px;color:#888;margin-top:3px">Percentual de turmas com as 4 evidências completas (Diário de Classe, Folha de Ponto, Fotos, Vídeos)</div>
           </div>
-          <div class="indice-pct" id="indice-pct">0%</div>
+          <div id="sc-txt" style="font-family:Montserrat,sans-serif;font-size:44px;font-weight:700;color:var(--azs);white-space:nowrap">--</div>
         </div>
-        <div class="indice-bar-wrap"><div class="indice-bar" id="indice-bar"></div></div>
+        <div class="sbw" style="height:22px"><div class="sb" id="bar-g" style="width:0%"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:#bbb">
+          <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+        </div>
       </div>
 
       <div class="st">Execução por Núcleo</div>
-      <div class="g4" id="terr-mini-row"></div>
+      <div class="g4" id="dash-terr" style="margin-bottom:20px"></div>
 
-      <div class="st">Evidência por Tipo</div>
-      <div class="g6" id="kpi-evidencia"></div>
-
-      <div id="alertas-secao"></div>
+      <div id="dash-alertas"></div>
     </div>
 
     <div class="vw" id="vw-territorios">
-      <div class="st">Núcleos e Turmas</div>
-      <input class="busca" id="busca-territorio" placeholder="Buscar por núcleo, turma ou modalidade..." oninput="renderizarTerritorios()">
-      <div id="lista-territorios"></div>
+      <div id="tlist">
+        <div class="st">Selecione um Núcleo</div>
+        <div class="g4" id="lista-terr"></div>
+      </div>
+      <div id="tdetalhe" style="display:none">
+        <button class="back" onclick="voltarLista()">Voltar aos Núcleos</button>
+        <div id="det-content"></div>
+      </div>
     </div>
 
     <div class="vw" id="vw-metas">
@@ -212,292 +217,344 @@ h1,h2,h3{font-family:'Montserrat',Arial,sans-serif}
     </div>
 
     <div class="vw" id="vw-pastas">
-      <div class="st">Pastas de Turma no Drive</div>
-      <div class="tmeta" style="margin-bottom:14px">Clique em ABRIR PASTA para acessar a pasta da turma no Google Drive.</div>
-      <div id="link-cards-comunicacao"></div>
-      <input class="busca" id="busca-pasta" placeholder="Buscar pasta por núcleo ou turma..." oninput="renderizarPastas()">
-      <div id="lista-pastas"></div>
+      <div class="st">Pastas de Evidências no Google Drive</div>
+      <div style="font-size:12px;color:#888;margin-bottom:20px">Clique em ABRIR PASTA para acessar a pasta da turma no Drive. Links preenchidos automaticamente na aba ATIVIDADES da planilha.</div>
+      <input class="busca" id="busca-pasta" placeholder="Buscar pasta por núcleo ou turma..." oninput="renderPastas()">
+      <div id="pastas-gerais"></div>
+      <div id="pastas-content"></div>
     </div>
-  </div>
 
-  <div class="rodape">
-    <div class="rodape-texto">Jogando Juntos pela Cidadania - Instituto BR Arte x Ministério do Esporte - 18 meses - 16 territórios</div>
-    <div class="rodape-badge">Monitoramento Operacional</div>
+    <div class="foot">
+      <div class="ftxt">Jogando Juntos pela Cidadania - Instituto BR Arte x Ministério do Esporte - 18 meses - 16 territórios</div>
+      <div class="fbadge">Monitoramento Operacional</div>
+    </div>
   </div>
 </div>
 
 <script>
-// Trocar pela URL do Web App do Apps Script deste projeto (Code.gs),
-// publicada com ?action=api
 var API_URL = 'https://script.google.com/macros/s/AKfycbw8n7S_EXYYJAQzWwFWED5iMRXNQ_EXJCmPBErxRmyoL7Frx0HXdQHvmowFOH112RKAdw/exec';
 var SENHA_ACESSO = 'Brarte@2026';
 
 var STATUS_KEYS = [
-  'Status Fichas de Inscrição', 'Status Listas de Presença', 'Status Fotos',
-  'Status Vídeos'
+  'Status Diário de Classe', 'Status Folha de Ponto', 'Status Fotos', 'Status Vídeos'
 ];
 var STATUS_LABELS = {
-  'Status Fichas de Inscrição': 'Fichas',
-  'Status Listas de Presença': 'Presença',
+  'Status Diário de Classe': 'Diário de Classe',
+  'Status Folha de Ponto': 'Folha de Ponto',
   'Status Fotos': 'Fotos',
   'Status Vídeos': 'Vídeos'
 };
 
 var DADOS = null;
+var TERR = [];
 
 function chkPwd() {
   var v = document.getElementById('pf').value;
   if (v === SENHA_ACESSO) {
-    document.getElementById('pwd').style.display = 'none';
-    carregarDados();
+    document.getElementById('pwd').classList.add('off');
+    carregarApp();
   } else {
-    document.getElementById('perr').innerText = 'Senha incorreta.';
+    document.getElementById('perr').textContent = 'Senha incorreta. Verifique com a coordenação.';
+    document.getElementById('pf').value = '';
   }
 }
 
-function carregarDados() {
-  document.getElementById('ld').style.display = 'flex';
+function carregarApp() {
+  document.getElementById('ld').classList.add('on');
   fetch(API_URL + '?action=api')
     .then(function (r) { return r.json(); })
     .then(function (data) {
       DADOS = data;
-      document.getElementById('ld').style.display = 'none';
-      document.getElementById('app').style.display = 'block';
-      renderizarDashboard();
-      renderizarTerritorios();
-      renderizarMetas();
-      renderizarPastas();
+      TERR = uniq(AT().map(function (t) { return t['Território']; })).sort();
+      document.getElementById('ld').classList.remove('on');
+      document.getElementById('app').classList.add('on');
+      renderAll();
     })
     .catch(function (err) {
-      document.getElementById('ld').style.display = 'none';
+      document.getElementById('ld').classList.remove('on');
       alert('Erro ao carregar dados: ' + err.message);
     });
 }
 
+function AT() { return (DADOS && DADOS.atividades) ? DADOS.atividades : []; }
+function MT() { return (DADOS && DADOS.metas) ? DADOS.metas : []; }
+function uniq(arr) { return arr.filter(function (v, i) { return arr.indexOf(v) === i; }); }
+
 // -------------------------------------------------------------------
-// STATUS DA TURMA - Concluído só quando as 7 subpastas tem evidência.
+// STATUS DA TURMA - Concluído só quando as 4 subpastas têm evidência.
 // Pasta vazia nunca conta como executado (regra de ouro).
 // -------------------------------------------------------------------
-function statusTurma(turma) {
-  var vals = STATUS_KEYS.map(function (k) { return turma[k]; });
+function statusTurma(t) {
+  var vals = STATUS_KEYS.map(function (k) { return t[k]; });
   var completos = vals.filter(function (v) { return v === 'Completo'; }).length;
-  if (completos === vals.length) return 'concluido';
-  if (completos === 0) return 'pendente';
-  return 'andamento';
+  if (completos === vals.length) return 'Concluído';
+  if (completos === 0) return 'Pendente';
+  return 'Em Andamento';
+}
+function statusClasse(st) {
+  if (st === 'Concluído') return 'R';
+  if (st === 'Em Andamento') return 'E';
+  return 'C';
+}
+function badgeClasse(st) { return 'b' + statusClasse(st); }
+
+function scl(n) {
+  if (n >= 75) return 'shi';
+  if (n >= 40) return 'smid';
+  if (n >= 10) return 'slow';
+  return 'scrit';
 }
 
-function labelStatus(st) {
-  if (st === 'concluido') return 'Concluído';
-  if (st === 'andamento') return 'Em Andamento';
-  return 'Pendente';
+function turmasTerritorio(nome) {
+  return AT().filter(function (r) { return r['Território'] === nome; });
 }
 
-function corBarra(pct) {
-  if (pct < 34) return 'var(--verm)';
-  if (pct < 67) return 'var(--am)';
-  return 'var(--verde)';
+function scT(nome) {
+  var rows = turmasTerritorio(nome);
+  if (!rows.length) return 0;
+  var concluidas = rows.filter(function (r) { return statusTurma(r) === 'Concluído'; }).length;
+  return Math.round((concluidas / rows.length) * 100);
 }
 
-function renderizarDashboard() {
-  var turmas = DADOS.atividades;
-  var total = turmas.length;
-  var concluidas = turmas.filter(function (t) { return statusTurma(t) === 'concluido'; }).length;
-  var andamento = turmas.filter(function (t) { return statusTurma(t) === 'andamento'; }).length;
-  var pendentes = total - concluidas - andamento;
-  var territorios = uniq(turmas.map(function (t) { return t['Território']; }));
-  var pct = total ? Math.round((concluidas / total) * 100) : 0;
+function scG() {
+  var rows = AT();
+  if (!rows.length) return 0;
+  var concluidas = rows.filter(function (r) { return statusTurma(r) === 'Concluído'; }).length;
+  return Math.round((concluidas / rows.length) * 100);
+}
+
+function encTerr(t) { return t.replace(/'/g, "\\'"); }
+
+function renderAll() {
+  renderDash();
+  renderListaT();
+  renderMetas();
+  renderPastas();
+}
+
+function kpiHtml(n, l) {
+  return '<div class="kpi"><div class="knum">' + n + '</div><div class="klab">' + l + '</div></div>';
+}
+
+// -------------------------------------------------------------------
+// DASHBOARD
+// -------------------------------------------------------------------
+function renderDash() {
+  var rows = AT();
+  var concluidas = rows.filter(function (r) { return statusTurma(r) === 'Concluído'; }).length;
 
   document.getElementById('kpi-row').innerHTML =
-    kpi(territorios.length + ' / 16', 'Núcleos com Turma Cadastrada') +
-    kpi(total, 'Turmas Monitoradas') +
-    kpi(concluidas, 'Turmas Concluídas') +
-    kpi(pct + '%', 'Execução Geral');
+    kpiHtml(TERR.length + ' / 16', 'Núcleos com Turma Cadastrada') +
+    kpiHtml(rows.length, 'Turmas Monitoradas') +
+    kpiHtml(concluidas + ' / ' + rows.length, 'Turmas Concluídas') +
+    kpiHtml(scG() + '%', 'Execução Geral');
 
-  document.getElementById('indice-pct').innerText = pct + '%';
-  document.getElementById('indice-bar').style.width = pct + '%';
-  document.getElementById('indice-bar').style.background = corBarra(pct);
+  var sg = scG();
+  document.getElementById('sc-txt').textContent = sg + '%';
+  var bg = document.getElementById('bar-g');
+  bg.style.width = sg + '%';
+  bg.className = 'sb ' + scl(sg);
 
-  document.getElementById('kpi-evidencia').innerHTML = STATUS_KEYS.map(function (k) {
-    var comEvidencia = turmas.filter(function (t) { return t[k] === 'Completo'; }).length;
-    var p = total ? Math.round((comEvidencia / total) * 100) : 0;
-    return kpi(p + '%', STATUS_LABELS[k]);
-  }).join('');
-
-  var porTerritorio = agruparPorTerritorio(turmas);
-  document.getElementById('terr-mini-row').innerHTML = Object.keys(porTerritorio).sort().map(function (terr) {
-    var lista = porTerritorio[terr];
-    var c = lista.filter(function (t) { return statusTurma(t) === 'concluido'; }).length;
-    var p = lista.length ? Math.round((c / lista.length) * 100) : 0;
-    var pend = lista.filter(function (t) { return statusTurma(t) === 'pendente'; }).length;
-    return '<div class="terr-mini">' +
-      '<div class="terr-mini-nome">' + terr.replace('-RJ', '') + '</div>' +
-      '<div class="terr-mini-pct">' + p + '%</div>' +
-      '<div class="mini-bar-wrap"><div class="mini-bar" style="width:' + p + '%;background:' + corBarra(p) + '"></div></div>' +
-      (pend > 0 ? '<span class="badge pendente">' + pend + ' pendente(s)</span>' : '<span class="badge concluido">Em dia</span>') +
-      '</div>';
-  }).join('');
-
-  var semEvidenciaAlguma = turmas.filter(function (t) { return statusTurma(t) === 'pendente'; });
-  var secaoAlertas = document.getElementById('alertas-secao');
-  if (semEvidenciaAlguma.length > 0) {
-    var linhas = semEvidenciaAlguma.slice(0, 30).map(function (t) {
-      return '<tr><td>' + t['Território'] + '</td><td>' + t['Nome da Turma'] + '</td><td>' + t['Modalidade Oficial'] + '</td><td>Nenhuma das 7 evidências registrada ainda</td></tr>';
-    }).join('');
-    secaoAlertas.innerHTML =
-      '<div class="st">Alertas</div>' +
-      '<div class="alerta-box">' + semEvidenciaAlguma.length + ' turma(s) sem nenhuma evidência registrada</div>' +
-      '<table class="alerta-tabela"><thead><tr><th>Território</th><th>Turma</th><th>Modalidade</th><th>Observação</th></tr></thead><tbody>' +
-      linhas + '</tbody></table>' +
-      (semEvidenciaAlguma.length > 30 ? '<div class="tmeta" style="margin-top:8px">Mostrando as primeiras 30 de ' + semEvidenciaAlguma.length + '. Veja a lista completa na aba Territórios.</div>' : '');
-  } else {
-    secaoAlertas.innerHTML = '';
-  }
-}
-
-function kpi(valor, label) {
-  return '<div class="kcard"><div class="kval">' + valor + '</div><div class="klabel">' + label + '</div></div>';
-}
-
-function uniq(arr) {
-  return arr.filter(function (v, i) { return arr.indexOf(v) === i; });
-}
-
-function agruparPorTerritorio(turmas) {
-  var porTerritorio = {};
-  turmas.forEach(function (t) {
-    if (!porTerritorio[t['Território']]) porTerritorio[t['Território']] = [];
-    porTerritorio[t['Território']].push(t);
+  var th = '';
+  TERR.forEach(function (t, i) {
+    var sc = scT(t);
+    var rowsT = turmasTerritorio(t);
+    var concT = rowsT.filter(function (r) { return statusTurma(r) === 'Concluído'; }).length;
+    th += '<div class="tcard" onclick="goV(\'territorios\');setTimeout(function(){abrirTerr(' + i + ')},120)">';
+    th += '<div class="tnome">' + t.replace('-RJ', '') + '</div>';
+    th += '<div class="tsc">' + sc + '%</div>';
+    th += '<div class="tmeta">' + concT + ' de ' + rowsT.length + ' turmas</div>';
+    th += '<div style="margin:8px 0"><div class="sbw" style="height:8px"><div class="sb ' + scl(sc) + '" style="width:' + sc + '%"></div></div></div>';
+    th += '</div>';
   });
-  return porTerritorio;
+  document.getElementById('dash-terr').innerHTML = th;
+
+  var semEvidencia = rows.filter(function (r) { return statusTurma(r) === 'Pendente'; });
+  var alertasHtml = '';
+  if (semEvidencia.length > 0) {
+    alertasHtml += '<div class="st">Alertas</div>';
+    alertasHtml += '<div class="abox"><div class="atit">' + semEvidencia.length + ' turma(s) sem nenhuma evidência registrada ainda</div></div>';
+    alertasHtml += '<div class="card" style="padding:0;overflow:auto"><table class="tbl">';
+    alertasHtml += '<tr><th>Núcleo</th><th>Turma</th><th>Modalidade</th><th>Observação</th></tr>';
+    semEvidencia.slice(0, 30).forEach(function (r) {
+      alertasHtml += '<tr><td><strong>' + (r['Território'] || '-') + '</strong></td>';
+      alertasHtml += '<td>' + (r['Nome da Turma'] || '-') + '</td>';
+      alertasHtml += '<td>' + (r['Modalidade Oficial'] || '-') + '</td>';
+      alertasHtml += '<td style="font-size:11px;color:#888">' + (r['Observações'] || '-') + '</td></tr>';
+    });
+    alertasHtml += '</table></div>';
+    if (semEvidencia.length > 30) {
+      alertasHtml += '<div class="tmeta" style="margin-top:8px">Mostrando as primeiras 30 de ' + semEvidencia.length + '. Veja a lista completa na aba Núcleos.</div>';
+    }
+  }
+  document.getElementById('dash-alertas').innerHTML = alertasHtml;
 }
 
 // -------------------------------------------------------------------
-// TERRITORIOS - agrupado por nucleo, expande para ver as turmas
+// LISTA DE NÚCLEOS
 // -------------------------------------------------------------------
-function renderizarTerritorios() {
-  var filtro = (document.getElementById('busca-territorio').value || '').toLowerCase();
-  var turmas = DADOS.atividades.filter(function (t) {
-    if (!filtro) return true;
-    return (t['Núcleo'] + ' ' + t['Nome da Turma'] + ' ' + t['Modalidade Oficial']).toLowerCase().indexOf(filtro) !== -1;
+function renderListaT() {
+  var h = '';
+  TERR.forEach(function (t, i) {
+    var sc = scT(t);
+    var rowsT = turmasTerritorio(t);
+    var concT = rowsT.filter(function (r) { return statusTurma(r) === 'Concluído'; }).length;
+    h += '<div class="tcard" onclick="abrirTerr(' + i + ')">';
+    h += '<div class="tnome">' + t + '</div>';
+    h += '<div class="tsc">' + sc + '%</div>';
+    h += '<div class="tmeta">' + concT + ' de ' + rowsT.length + ' turmas concluídas</div>';
+    h += '<div style="margin:10px 0"><div class="sbw" style="height:8px"><div class="sb ' + scl(sc) + '" style="width:' + sc + '%"></div></div></div>';
+    h += '<div class="tlink">Ver turmas e evidências -&gt;</div>';
+    h += '</div>';
   });
-
-  var porTerritorio = agruparPorTerritorio(turmas);
-  var territorios = Object.keys(porTerritorio).sort();
-  var html = territorios.map(function (terr, idx) {
-    var lista = porTerritorio[terr];
-    var concluidas = lista.filter(function (t) { return statusTurma(t) === 'concluido'; }).length;
-    var pct = lista.length ? Math.round((concluidas / lista.length) * 100) : 0;
-    var id = 'terr-' + idx;
-
-    var linhasTurma = lista.map(function (t) {
-      var chipsHtml = STATUS_KEYS.map(function (k) {
-        var v = t[k];
-        var cls = v === 'Completo' ? 'completo' : 'pendente';
-        return '<span class="chip ' + cls + '">' + STATUS_LABELS[k] + '</span>';
-      }).join('');
-      var link = t['Link da Pasta Drive']
-        ? '<a class="tlink" href="' + t['Link da Pasta Drive'] + '" target="_blank">Abrir pasta</a>'
-        : '<span class="tlink" style="opacity:.4">Sem pasta</span>';
-      return '<div class="turma-row">' +
-        '<div><div class="turma-nome">' + t['Nome da Turma'] + '</div>' +
-        '<div class="turma-info">' + t['Modalidade Oficial'] + ' | ' + (t['Dias e Horário'] || '') + '</div></div>' +
-        '<div class="chips">' + chipsHtml + '</div>' + link + '</div>';
-    }).join('');
-
-    return '<div class="tcard">' +
-      '<div class="thead" onclick="toggleTerritorio(\'' + id + '\')">' +
-      '<div><div class="tnome">' + terr + '</div><div class="tmeta">' + lista.length + ' turmas</div></div>' +
-      '<div style="display:flex;align-items:center;gap:10px">' +
-      '<div class="tbar-wrap"><div class="tbar" style="width:' + pct + '%;background:' + corBarra(pct) + '"></div></div>' +
-      '<div class="tpct">' + pct + '%</div></div></div>' +
-      '<div class="tbody" id="' + id + '">' + linhasTurma + '</div></div>';
-  }).join('');
-
-  if (territorios.length === 0) {
-    html = '<div class="tmeta">Nenhum resultado para essa busca.</div>';
-  }
-
-  document.getElementById('lista-territorios').innerHTML = html;
+  document.getElementById('lista-terr').innerHTML = h;
 }
 
-function toggleTerritorio(id) {
-  document.getElementById(id).classList.toggle('on');
+function voltarLista() {
+  document.getElementById('tlist').style.display = 'block';
+  document.getElementById('tdetalhe').style.display = 'none';
+}
+
+function abrirTerr(idx) {
+  document.getElementById('tlist').style.display = 'none';
+  document.getElementById('tdetalhe').style.display = 'block';
+  renderDetalhe(idx);
+}
+
+// -------------------------------------------------------------------
+// DETALHE DE NÚCLEO - turmas agrupadas por Modalidade Oficial
+// -------------------------------------------------------------------
+function renderDetalhe(idx) {
+  var nome = TERR[idx];
+  var tR = turmasTerritorio(nome);
+  var sc = scT(nome);
+  var concl = tR.filter(function (r) { return statusTurma(r) === 'Concluído'; }).length;
+  var h = '';
+
+  h += '<div class="card" style="background:var(--az);padding:22px 26px;margin-bottom:20px">';
+  h += '<div style="font-size:17px;font-weight:700;color:var(--am);font-family:Montserrat,sans-serif">' + nome + '</div>';
+  h += '<div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px">Monitoramento por modalidade</div>';
+  h += '<div style="margin-top:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">';
+  h += '<div style="font-size:40px;font-weight:700;color:var(--br);font-family:Montserrat,sans-serif">' + sc + '%</div>';
+  h += '<div style="flex:1;min-width:160px">';
+  h += '<div class="sbw" style="height:14px"><div class="sb ' + scl(sc) + '" style="width:' + sc + '%"></div></div>';
+  h += '<div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:4px">' + concl + ' de ' + tR.length + ' turmas concluídas</div>';
+  h += '</div></div></div>';
+
+  var porModalidade = {};
+  tR.forEach(function (r) {
+    var mod = r['Modalidade Oficial'] || '-';
+    if (!porModalidade[mod]) porModalidade[mod] = [];
+    porModalidade[mod].push(r);
+  });
+
+  h += '<div class="st">Turmas por Modalidade</div>';
+  Object.keys(porModalidade).sort().forEach(function (mod) {
+    var lista = porModalidade[mod];
+    var concMod = lista.filter(function (r) { return statusTurma(r) === 'Concluído'; }).length;
+    h += '<div style="margin-bottom:18px">';
+    h += '<div style="font-size:12px;font-weight:700;color:var(--az);font-family:Montserrat,sans-serif;margin-bottom:8px">' + mod + ' <span style="color:#999;font-weight:400">(' + concMod + ' de ' + lista.length + ')</span></div>';
+    h += '<div class="g3">';
+    lista.forEach(function (r) {
+      var st = statusTurma(r);
+      h += '<div class="oscard st' + statusClasse(st) + '">';
+      h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">';
+      h += '<div class="osnome">' + (r['Nome da Turma'] || '-') + '</div>';
+      h += '<span class="badge ' + badgeClasse(st) + '">' + st + '</span></div>';
+      h += '<div class="osfase">' + (r['Dias e Horário'] || '') + '</div>';
+      if (r['Link da Pasta Drive']) h += '<a class="oslink" href="' + r['Link da Pasta Drive'] + '" target="_blank">Abrir pasta no Drive</a>';
+      else h += '<div style="font-size:11px;color:#ccc;margin-top:6px">Sem link registrado</div>';
+      if (r['Observações']) h += '<div class="obs-alerta">' + r['Observações'] + '</div>';
+      h += '</div>';
+    });
+    h += '</div></div>';
+  });
+
+  document.getElementById('det-content').innerHTML = h;
 }
 
 // -------------------------------------------------------------------
 // METAS
 // -------------------------------------------------------------------
-function renderizarMetas() {
-  var html = DADOS.metas.map(function (m) {
-    return '<div class="mcard">' +
-      '<div class="mcodigo">' + m['Código Meta'] + '</div>' +
-      '<div class="mdesc">' + m['Descrição'] + '</div>' +
-      '<div class="mnums">' +
-      '<div class="mnum">Previsto: <b>' + (m['Quantidade Prevista'] || '-') + '</b></div>' +
-      '<div class="mnum">Realizado: <b>' + (m['Quantidade Realizada'] || '-') + '</b></div>' +
+function renderMetas() {
+  var html = MT().map(function (m) {
+    return '<div class="card" style="margin-bottom:10px">' +
+      '<div style="font-size:10px;font-weight:700;color:var(--azs);letter-spacing:1px">' + m['Código Meta'] + '</div>' +
+      '<div style="font-family:Montserrat,sans-serif;font-weight:700;font-size:14px;margin:4px 0">' + m['Descrição'] + '</div>' +
+      '<div style="display:flex;gap:18px;margin-top:6px;font-size:12px;color:#666">' +
+      '<div>Previsto: <b style="color:var(--az)">' + (m['Quantidade Prevista'] || '-') + '</b></div>' +
+      '<div>Realizado: <b style="color:var(--az)">' + (m['Quantidade Realizada'] || '-') + '</b></div>' +
       '</div>' +
-      (m['Observação'] ? '<div class="mobs">' + m['Observação'] + '</div>' : '') +
+      (m['Observação'] ? '<div style="font-size:11px;color:#999;margin-top:6px;font-style:italic">' + m['Observação'] + '</div>' : '') +
       '</div>';
   }).join('');
   document.getElementById('lista-metas').innerHTML = html;
 }
 
 // -------------------------------------------------------------------
-// PASTAS DRIVE - grade por nucleo, uma pasta por turma, com badge
+// PASTAS DRIVE
 // -------------------------------------------------------------------
-function renderizarPastas() {
+function renderPastas() {
   var linksGerais = [
     ['Cards de Comunicação', DADOS.config && DADOS.config.LINK_PASTA_CARDS_COMUNICACAO],
     ['Materiais Esportivos', DADOS.config && DADOS.config.LINK_PASTA_MATERIAIS_ESPORTIVOS],
     ['Identidade Visual', DADOS.config && DADOS.config.LINK_PASTA_IDENTIDADE_VISUAL],
     ['Kit Documental', DADOS.config && DADOS.config.LINK_PASTA_KIT_DOCUMENTAL]
-  ];
-  var blocosGerais = linksGerais
-    .filter(function (item) { return item[1]; })
-    .map(function (item) {
-      return '<div class="pasta-territorio-box" style="margin-bottom:14px"><div class="pasta-territorio-titulo">' + item[0] + ' (pasta geral do projeto)</div>' +
-        '<a class="pasta-btn" style="max-width:220px" href="' + item[1] + '" target="_blank">Abrir Pasta</a></div>';
-    }).join('');
-  document.getElementById('link-cards-comunicacao').innerHTML = blocosGerais;
+  ].filter(function (item) { return item[1]; });
+
+  var geraisHtml = '';
+  if (linksGerais.length) {
+    geraisHtml += '<div class="pterr-grupo"><div class="pterr-nome">Pastas Gerais do Projeto</div><div class="pterr-grid">';
+    linksGerais.forEach(function (item) {
+      geraisHtml += '<div class="pcard"><div class="pcard-os">' + item[0] + '</div>' +
+        '<a class="pcard-btn" href="' + item[1] + '" target="_blank">ABRIR PASTA</a></div>';
+    });
+    geraisHtml += '</div></div>';
+  }
+  document.getElementById('pastas-gerais').innerHTML = geraisHtml;
 
   var filtro = (document.getElementById('busca-pasta').value || '').toLowerCase();
-  var turmas = DADOS.atividades.filter(function (t) {
-    if (!filtro) return true;
-    return (t['Núcleo'] + ' ' + t['Nome da Turma']).toLowerCase().indexOf(filtro) !== -1;
+  var html = '';
+
+  TERR.forEach(function (terr) {
+    var rowsT = turmasTerritorio(terr).filter(function (r) {
+      if (!filtro) return true;
+      return (terr + ' ' + r['Nome da Turma']).toLowerCase().indexOf(filtro) !== -1;
+    });
+    if (!rowsT.length) return;
+    html += '<div class="pterr-grupo">';
+    html += '<div class="pterr-nome">' + terr + ' - ' + rowsT.length + ' turmas</div>';
+    html += '<div class="pterr-grid">';
+    rowsT.forEach(function (r) {
+      var st = statusTurma(r);
+      var lk = r['Link da Pasta Drive'] || '';
+      html += '<div class="pcard st' + statusClasse(st) + '">';
+      html += '<div style="display:flex;align-items:center;justify-content:space-between;gap:4px">';
+      html += '<div class="pcard-os">' + (r['Nome da Turma'] || '-') + '</div>';
+      html += '<span class="badge ' + badgeClasse(st) + '" style="font-size:9px;padding:2px 7px">' + st + '</span>';
+      html += '</div>';
+      html += '<div class="pcard-ativ">' + (r['Modalidade Oficial'] || '-') + '</div>';
+      if (lk) {
+        html += '<a class="pcard-btn" href="' + lk + '" target="_blank">ABRIR PASTA</a>';
+      } else {
+        html += '<span class="pcard-btn vazia">SEM LINK</span>';
+      }
+      html += '</div>';
+    });
+    html += '</div></div>';
   });
 
-  var porTerritorio = agruparPorTerritorio(turmas);
-  var territorios = Object.keys(porTerritorio).sort();
-
-  var html = territorios.map(function (terr) {
-    var lista = porTerritorio[terr];
-    var cards = lista.map(function (t) {
-      var st = statusTurma(t);
-      var link = t['Link da Pasta Drive']
-        ? '<a class="pasta-btn" href="' + t['Link da Pasta Drive'] + '" target="_blank">Abrir Pasta</a>'
-        : '<span class="pasta-btn disabled">Sem Pasta</span>';
-      return '<div class="pasta-card ' + st + '">' +
-        '<div class="pasta-card-top"><div class="pasta-card-nome">' + t['Nome da Turma'] + '</div>' +
-        '<span class="badge ' + st + '">' + labelStatus(st) + '</span></div>' +
-        '<div class="pasta-card-info">' + t['Modalidade Oficial'] + '</div>' +
-        link + '</div>';
-    }).join('');
-    return '<div class="pasta-territorio-box">' +
-      '<div class="pasta-territorio-titulo">' + terr + ' - ' + lista.length + ' turmas</div>' +
-      '<div class="pasta-grid">' + cards + '</div></div>';
-  }).join('');
-
-  if (territorios.length === 0) {
-    html = '<div class="tmeta">Nenhum resultado para essa busca.</div>';
-  }
-  document.getElementById('lista-pastas').innerHTML = html;
+  if (!html) html = '<div class="tmeta">Nenhum resultado para essa busca.</div>';
+  document.getElementById('pastas-content').innerHTML = html;
 }
 
-function goV(nome) {
-  document.querySelectorAll('.vw').forEach(function (v) { v.classList.remove('on'); });
-  document.getElementById('vw-' + nome).classList.add('on');
-  document.querySelectorAll('.nbtn').forEach(function (b) { b.classList.remove('on'); });
-  event.target.classList.add('on');
+function goV(v) {
+  document.querySelectorAll('.vw').forEach(function (e) { e.classList.remove('on'); });
+  document.querySelectorAll('.nbtn').forEach(function (e) { e.classList.remove('on'); });
+  document.getElementById('vw-' + v).classList.add('on');
+  document.querySelectorAll('.nbtn').forEach(function (e) {
+    if ((e.getAttribute('onclick') || '').indexOf("'" + v + "'") !== -1) e.classList.add('on');
+  });
 }
 </script>
 </body>
