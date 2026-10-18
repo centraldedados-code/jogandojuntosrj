@@ -31,6 +31,8 @@ main{max-width:1480px;margin:0 auto;padding:29px 24px 75px}.eyebrow{display:inli
 .jj-doc-protected strong{display:block;font-size:12px;color:#092040;margin-bottom:5px}
 .jj-preview-hint{position:absolute;bottom:9px;left:9px;right:9px;color:#fff;background:rgba(9,32,64,.73);font-size:10px;text-align:center;padding:5px;border-radius:6px}
 
+
+.jj-doc-auth{padding:17px;background:#f0f8fc;border:1px solid #c8e3eb;border-radius:12px;margin:13px 0}.jj-doc-auth strong{color:#092040;display:block;margin-bottom:9px}.jj-doc-auth p{font-size:12px;color:#46677c}.jj-doc-connect{display:flex;gap:9px;flex-wrap:wrap}.jj-doc-connect input{flex:1;min-width:250px;padding:11px;border:1px solid #b5ccd9;border-radius:9px}.jj-doc-frame{display:block;width:100%;height:650px;border:1px solid #c8d8e5;background:#fff;border-radius:12px;margin-top:14px}.jj-doc-auth .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
 </style></head>
 <body>
 <header><div class="headinner"><div class="brand"><div class="logos"><img src="assets/logo-jogando-juntos.png" alt="Logomarca Jogando Juntos pela Cidadania"><img src="assets/logo-instituto-br-arte.png" alt="Logomarca Instituto BR Arte"></div><div><h1>JOGANDO JUNTOS PELA CIDADANIA</h1><p>Central de Monitoramento e Evidências · Instituto BR Arte</p></div></div><nav class="topnav" aria-label="Navegação principal"><button data-page="dashboard" aria-current="page">Início</button><button data-page="territorios">Territórios</button><button data-page="atividades">Turmas</button><button data-page="galeria">Galeria e Fichas</button><button data-page="pendencias">Pendências</button><button data-page="metas">Metas</button><button data-page="drive">Drive</button></nav></div></header>
@@ -42,7 +44,7 @@ main{max-width:1480px;margin:0 auto;padding:29px 24px 75px}.eyebrow{display:inli
 // API pública: devolve somente imagens e vídeos com autorização registrada; documentos pessoais não são publicados.
 const API_URL='https://script.google.com/macros/s/AKfycbw8n7S_EXYYJAQzWwFWED5iMRXNQ_EXJCmPBErxRmyoL7Frx0HXdQHvmowFOH112RKAdw/exec';
 const ROOT_DRIVE='https://drive.google.com/drive/folders/1bJlN6caRRxZguyAX2BmH12l18P9Y7_c8';
-const API_DOCUMENTOS_SEGUROS=''; // Opcional: URL da segunda implantação Google executada como leitor. A planilha define quem tem acesso; NÃO use a API pública.
+const API_DOCUMENTOS_SEGUROS='https://script.google.com/macros/s/AKfycby5jC25_jVE2HtFrKnRgAD5tbB7VkNkKrtNgV54HFx-awfZHkq_vULAu6-bPMH8n9kakA/exec'; // Consulta documental: implantação autenticada, separada da API pública.
 let D=null,P={page:'dashboard',step:0,territorio:'',modalidade:'',busca:'',onlyFiles:false},F={id:'',tipo:'FOTO',page:1},lastFiles=[],previewIndex=0,seq=0,reqNum=0;
 const CATEGORIES=[['TODOS','Acervo completo',null],['FOTO','Fotografias','fotos'],['DIARIO_DE_CLASSE','Diários de classe','diarios'],['FOLHA_DE_PONTO','Folhas de ponto','ponto'],['LISTA_PRESENCA','Listas de presença','listas'],['LISTA_DE_INSCRITOS','Listas de inscritos',null],['RELATORIO','Relatórios','relatorios'],['FICHA_INSCRICAO','Inscrições','inscricoes'],['VIDEO','Vídeos','videos'],['DECLARACAO','Declarações',null],['CERTIFICADO','Certificados',null],['TERMO','Termos',null],['OUTRO_DOCUMENTO','Outros documentos',null],['OUTRO','Outras evidências',null],['TIPO_NAO_IDENTIFICADO','Não identificados',null]];
 const ICONS={'Ginástica':'◈','Futebol':'⚽','Lutas':'◇','Handebol':'◉','Basquete':'◉','Vôlei':'◈','Dança de Salão':'♫'};
@@ -167,17 +169,44 @@ function jjMiniaturasDocumentos(items,offset=0){
    '<a class="btn linebtn small" href="'+validUrl(a.url)+'" target="_blank" rel="noopener noreferrer">Original ↗</a></div></div></article>';
  }).join('')+'</div>';
 }
+
+function jjDocUrlConfigurada(){
+ const query=new URLSearchParams(location.search).get('docs')||'';
+ const valid=v=>/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(String(v||''));
+ if(valid(query)){try{localStorage.setItem('JJ_DOC_PRIVATE_URL',query)}catch(_){}return query;}
+ if(valid(API_DOCUMENTOS_SEGUROS))return API_DOCUMENTOS_SEGUROS;
+ try{const saved=localStorage.getItem('JJ_DOC_PRIVATE_URL')||'';if(valid(saved))return saved;}catch(_){}
+ return '';
+}
+function jjDocViewUrl(tipo,pagina=1){
+ const api=jjDocUrlConfigurada();if(!api)return '';
+ return api+'?'+new URLSearchParams({action:'jj_view',ficha:F.id,tipo,pagina:String(pagina)}).toString();
+}
 function jjDocumentoAguardandoAcesso(tipo,msg){
- const nDocs=jjContarDocumentos(tipo),label=JJ_DOC_LABEL[tipo]||'Documentos da turma';
- const pasta=jjPastaSegura();
- return '<div class="jj-doc-protected"><strong>'+nDocs+' registro(s): '+esc(label)+'</strong><p>Os documentos originais fazem parte desta ficha, mas esta página pública não recebeu permissão para mostrar nomes, assinaturas e dados individuais. Não são arquivos excluídos.</p>'+ (pasta?'<a class="btn gold small" href="'+pasta+'" target="_blank" rel="noopener noreferrer">Abrir documentos da turma no Drive ↗</a>':'<a class="btn gold small" href="'+ROOT_DRIVE+'" target="_blank" rel="noopener noreferrer">Consultar acervo no Drive ↗</a>')+'</div>';
+ const count=jjContarDocumentos(tipo),name=JJ_DOC_LABEL[tipo]||'Documentos desta ficha',url=jjDocViewUrl(tipo,F.page);
+ if(url){
+   return '<section class="jj-doc-auth"><strong>'+count+' registro(s) de '+esc(name)+'</strong>'+ 
+   '<p>Miniaturas e documentos originais no visor Google autenticado. Se a janela interna pedir login ou não carregar, use <b>Abrir visor em outra guia</b>.</p>'+ 
+   '<div class="actions"><a class="btn gold small" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Abrir visor completo em outra guia ↗</a>'+ 
+   '<button class="btn soft small" data-jj-share>Copiar link com acesso ao visor</button></div>'+ 
+   '<iframe class="jj-doc-frame" loading="lazy" title="Visor institucional de '+esc(name)+'" src="'+esc(url)+'"></iframe></section>';
+ }
+ return '<section class="jj-doc-auth"><strong>'+count+' registro(s) de '+esc(name)+'</strong>'+ 
+ '<p>Os documentos continuam no Drive. Para mostrar miniaturas reais e ampliar páginas com dados pessoais, conecte o endereço da implantação Google <b>Executar como: usuário que acessa</b>, após implantá-la.</p>'+ 
+ '<div class="jj-doc-connect"><input id="jjDocInput" type="url" placeholder="Cole aqui a URL privada do Apps Script (/exec)" aria-label="URL da implantação documental"/>'+ 
+ '<button class="btn gold small" data-jj-save>Conectar visor documental</button></div>'+ 
+ '<p class="tiny muted">A URL fica salva neste navegador. Ela não substitui a verificação de acesso da conta Google.</p></section>';
 }
+document.addEventListener('click',e=>{
+ const save=e.target.closest('[data-jj-save]');
+ if(save){const input=document.getElementById('jjDocInput'),u=(input?.value||'').trim();
+  if(!/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(u)){alert('Cole o endereço completo do Apps Script, terminando em /exec.');return;}
+  try{localStorage.setItem('JJ_DOC_PRIVATE_URL',u);}catch(_){alert('Armazenamento indisponível. Abra o link da implantação diretamente.');return;}
+  loadFiles();return;}
+ if(e.target.closest('[data-jj-share]')){const u=jjDocUrlConfigurada();if(u){const link=location.origin+location.pathname+'?docs='+encodeURIComponent(u);navigator.clipboard?.writeText(link).then(()=>alert('Link copiado: compartilhe apenas com profissionais autorizados.')).catch(()=>prompt('Copie o link:',link));}}
+});
 function jjWireDocs(){document.querySelectorAll('[data-doc-preview]').forEach(b=>b.onclick=()=>openPreview(n(b.dataset.docPreview)));}
-async function jjCarregarDocs(tipo,pg){
- if(!API_DOCUMENTOS_SEGUROS || !/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(API_DOCUMENTOS_SEGUROS))
-    throw Error('A galeria documental autenticada ainda não foi conectada.');
- return query('jj_docs',{ficha:F.id,tipo,pagina:String(pg)},API_DOCUMENTOS_SEGUROS);
-}
+async function jjCarregarDocs(tipo,pagina){throw Error('Os documentos completos são consultados no visor institucional Google, não na API pública.');}
 async function loadFiles(){
  const key=F.id+'|'+F.tipo+'|'+F.page;
  el('fileResult').innerHTML='<div class="loading"><span class="spinner"></span>Consultando as evidências desta ficha…</div>';
