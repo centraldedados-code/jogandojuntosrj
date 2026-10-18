@@ -14,6 +14,23 @@ main{max-width:1480px;margin:0 auto;padding:29px 24px 75px}.eyebrow{display:inli
 #overlay{position:fixed;inset:0;background:#06182caa;z-index:80;display:none;justify-content:flex-end}#overlay.on{display:flex}.drawer{height:100%;width:min(1020px,100vw);overflow:auto;background:#f6f8fa;box-shadow:-15px 0 60px #0012}.drawer-top{position:sticky;top:0;z-index:2;background:#fff;border-bottom:1px solid var(--line);padding:18px 22px;display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.drawer-title{margin:4px 0;font:800 19px Montserrat;color:var(--navy)}.drawer-main{padding:18px 22px 48px}.drawer-summary{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}.drawer-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:13px 0}.drawer-facts div{background:#f0f5f8;padding:12px;border-radius:9px}.drawer-facts b{display:block;color:var(--navy);font:800 22px Montserrat}.drawer-facts small{font-size:10px;color:var(--muted)}.document-tabs{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:14px 0}.document-tabs button{background:#fff;border:1px solid var(--line);color:var(--navy);border-radius:8px;padding:9px 12px;font:700 10px Montserrat}.document-tabs button[aria-selected="true"]{color:var(--gold);border-color:var(--navy);background:var(--navy)}.medialist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.media{background:white;border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-width:0}.imagebox{aspect-ratio:4/3;background:#e8eff4;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}.imagebox img{width:100%;height:100%;object-fit:contain}.imagebox span{font-size:23px;color:#a1b3c0}.media-body{padding:12px;display:flex;flex-direction:column;gap:7px;flex:1;min-width:0}.media-body strong{font:700 11px Montserrat;color:var(--navy);overflow-wrap:anywhere;line-height:1.4}.media-body small{font-size:10px;color:var(--muted);overflow-wrap:anywhere}.media-body .actions{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px}.pager{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:14px 0}.closer{border:1px solid #d5dfe5;border-radius:8px;background:white;padding:8px 11px;color:var(--navy);font-weight:700}
 #preview{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:#031325eb;padding:18px}#preview.on{display:flex}.previewbox{width:min(1040px,100%);background:white;border-radius:13px;overflow:hidden;display:flex;flex-direction:column;max-height:94vh}.previewbar{padding:12px 15px;display:flex;gap:10px;align-items:center;justify-content:space-between}.previewbar strong{overflow-wrap:anywhere;font-size:12px}.previewcontent{background:#182a3a;display:grid;place-items:center;min-height:200px;max-height:72vh;overflow:auto}.previewcontent img{max-width:100%;max-height:72vh;object-fit:contain}.previewcontent iframe{width:100%;height:70vh;border:0;background:white}.previewfoot{padding:10px 15px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}.loading{padding:45px;text-align:center;color:#567588;font-weight:700}.spinner{display:inline-block;width:22px;height:22px;border:3px solid #d4e1e7;border-top-color:var(--aqua);border-radius:100%;vertical-align:middle;animation:spin .7s linear infinite;margin-right:8px}@keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:1150px){.headinner{justify-content:flex-start}.topnav{width:100%}.grid4,.statgrid,.step-row{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:760px){main{padding:20px 13px 60px}.headinner{padding:9px 12px}.grid3,.grid2,.medialist{grid-template-columns:repeat(2,minmax(0,1fr))}.drawer-facts{grid-template-columns:repeat(2,minmax(0,1fr))}.drawer-top,.drawer-main{padding:13px}.status-band{align-items:stretch;flex-direction:column}.topnav{gap:0}}@media(max-width:530px){.brand h1{font-size:12px}.brand p{font-size:9px}.logos img{height:39px;max-width:78px}.logos img:first-child{max-width:83px}.grid3,.grid2,.grid4,.statgrid,.step-row,.medialist{grid-template-columns:1fr}.toolbar input,.toolbar select{min-width:100%;width:100%}.drawer-title{font-size:15px}}
+.jj-doc-access{background:#f4faff;border:1px solid #c9e2ee;border-left:5px solid #00B7D7;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;border-radius:12px;margin-bottom:15px}.jj-doc-access h3{font:800 14px Montserrat;color:#092040;margin:7px 0}.jj-doc-access p{font-size:11px;color:#435b6d;line-height:1.6;max-width:740px}.jj-doc-access .btn{white-space:normal;text-align:center}.video-play-icon{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#092040df;color:#ECC203!important;width:55px;height:55px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:23px!important;box-shadow:0 4px 15px #0004;pointer-events:none}.imagebox[data-preview]{cursor:pointer}.imagebox[data-preview]:hover{background:#d7e6ee}
+
+/* Conexões Criativas: miniaturas em cartão, visor ampliado, navegação */
+.jj-doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:13px;margin:15px 0}
+.jj-doc-card{background:white;border-radius:12px;border:1px solid #dae2e9;overflow:hidden;box-shadow:0 5px 14px rgba(9,32,64,.035)}
+.jj-doc-preview{width:100%;height:166px;display:flex;align-items:center;justify-content:center;position:relative;border:0;border-bottom:1px solid #e2e9ee;background:#eff5fa;cursor:pointer;padding:0}
+.jj-doc-preview img{width:100%;height:100%;object-fit:contain;background:#f6f8fb}
+.jj-doc-preview .jj-doc-fallback{font:700 14px Montserrat,sans-serif;color:#50657d;text-align:center;padding:14px;line-height:1.8}
+.jj-doc-preview .jj-doc-tag{position:absolute;top:10px;left:10px;color:#092040;background:#fff;border:1px solid #d4dce6;border-radius:7px;padding:4px 9px;font-weight:800;font-size:10px}
+.jj-doc-meta{padding:12px;min-height:120px;display:flex;flex-direction:column;gap:8px}
+.jj-doc-meta strong{color:#0b274a;font:700 12px Montserrat,sans-serif;overflow-wrap:anywhere;line-height:1.5}
+.jj-doc-meta small{color:#61768b;font-size:10px}
+.jj-doc-meta .actions{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px}
+.jj-doc-protected{background:#f4f9fd;padding:14px;border:1px solid #cbdfe8;border-radius:12px;margin:10px 0 15px;color:#345269;font-size:11px;line-height:1.55}
+.jj-doc-protected strong{display:block;font-size:12px;color:#092040;margin-bottom:5px}
+.jj-preview-hint{position:absolute;bottom:9px;left:9px;right:9px;color:#fff;background:rgba(9,32,64,.73);font-size:10px;text-align:center;padding:5px;border-radius:6px}
+
 </style></head>
 <body>
 <header><div class="headinner"><div class="brand"><div class="logos"><img src="assets/logo-jogando-juntos.png" alt="Logomarca Jogando Juntos pela Cidadania"><img src="assets/logo-instituto-br-arte.png" alt="Logomarca Instituto BR Arte"></div><div><h1>JOGANDO JUNTOS PELA CIDADANIA</h1><p>Central de Monitoramento e Evidências · Instituto BR Arte</p></div></div><nav class="topnav" aria-label="Navegação principal"><button data-page="dashboard" aria-current="page">Início</button><button data-page="territorios">Territórios</button><button data-page="atividades">Turmas</button><button data-page="galeria">Galeria e Fichas</button><button data-page="pendencias">Pendências</button><button data-page="metas">Metas</button><button data-page="drive">Drive</button></nav></div></header>
@@ -22,10 +39,12 @@ main{max-width:1480px;margin:0 auto;padding:29px 24px 75px}.eyebrow{display:inli
 <div id="preview" role="dialog" aria-modal="true" aria-label="Visualização da evidência"><div class="previewbox"><div class="previewbar"><strong id="previewName">Arquivo</strong><button class="closer" id="closePreview">Fechar ×</button></div><div class="previewcontent" id="previewContent"></div><div class="previewfoot"><span class="tiny muted" id="previewPosition"></span><div class="pills"><button class="btn small linebtn" id="previewPrev">← Anterior</button><a class="btn small" id="previewOriginal" target="_blank" rel="noopener noreferrer">Abrir original no Drive ↗</a><button class="btn small linebtn" id="previewNext">Próximo →</button></div></div></div></div>
 <script>
  'use strict';
+// API pública: devolve somente imagens e vídeos com autorização registrada; documentos pessoais não são publicados.
 const API_URL='https://script.google.com/macros/s/AKfycbw8n7S_EXYYJAQzWwFWED5iMRXNQ_EXJCmPBErxRmyoL7Frx0HXdQHvmowFOH112RKAdw/exec';
 const ROOT_DRIVE='https://drive.google.com/drive/folders/1bJlN6caRRxZguyAX2BmH12l18P9Y7_c8';
+const API_DOCUMENTOS_SEGUROS=''; // Cole aqui APENAS a URL da SEGUNDA implantação Google autenticada. Não use API_URL pública.
 let D=null,P={page:'dashboard',step:0,territorio:'',modalidade:'',busca:'',onlyFiles:false},F={id:'',tipo:'FOTO',page:1},lastFiles=[],previewIndex=0,seq=0,reqNum=0;
-const CATEGORIES=[['FOTO','Fotografias','fotos'],['DIARIO_DE_CLASSE','Diários de classe','diarios'],['FOLHA_DE_PONTO','Folhas de ponto','ponto'],['LISTA_PRESENCA','Listas de presença','listas'],['RELATORIO','Relatórios','relatorios'],['FICHA_INSCRICAO','Inscrições','inscricoes'],['VIDEO','Vídeos','videos'],['DECLARACAO','Declarações',null],['CERTIFICADO','Certificados',null],['TERMO','Termos',null],['OUTRO_DOCUMENTO','Outros documentos',null],['TIPO_NAO_IDENTIFICADO','Não identificados',null]];
+const CATEGORIES=[['TODOS','Acervo completo',null],['FOTO','Fotografias','fotos'],['DIARIO_DE_CLASSE','Diários de classe','diarios'],['FOLHA_DE_PONTO','Folhas de ponto','ponto'],['LISTA_PRESENCA','Listas de presença','listas'],['LISTA_DE_INSCRITOS','Listas de inscritos',null],['RELATORIO','Relatórios','relatorios'],['FICHA_INSCRICAO','Inscrições','inscricoes'],['VIDEO','Vídeos','videos'],['DECLARACAO','Declarações',null],['CERTIFICADO','Certificados',null],['TERMO','Termos',null],['OUTRO_DOCUMENTO','Outros documentos',null],['OUTRO','Outras evidências',null],['TIPO_NAO_IDENTIFICADO','Não identificados',null]];
 const ICONS={'Ginástica':'◈','Futebol':'⚽','Lutas':'◇','Handebol':'◉','Basquete':'◉','Vôlei':'◈','Dança de Salão':'♫'};
 const el=id=>document.getElementById(id),esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(),n=v=>Number(v)||0;
 function validUrl(u){return /^https:\/\/(?:drive|docs)\.google\.com\//.test(String(u||''))?esc(u):'';}
@@ -38,7 +57,7 @@ function setPage(page){P.page=page;P.busca='';if(page==='galeria' && P.step===0)
 function view(html){el('main').innerHTML=html+footer();document.querySelectorAll('[data-page]').forEach(x=>x.setAttribute('aria-current',x.dataset.page===P.page?'page':'false'));wireCommon();}
 function wireCommon(){document.querySelectorAll('[data-action="refresh"]').forEach(b=>b.onclick=refresh);document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openFicha(b.dataset.open));document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>setPage(b.dataset.nav));}
 function error(err){el('main').innerHTML='<div class="warn"><strong>Não foi possível atualizar o monitoramento.</strong><p>'+esc(err?.message||err||'Falha na comunicação com o Apps Script')+'</p><button class="btn" id="retry">Tentar novamente</button></div>';el('retry').onclick=refresh;}
-function query(action,fields){return new Promise((resolve,reject)=>{let q='jjcb_'+Date.now()+'_'+(++seq),s=document.createElement('script'),done=false;let timer=setTimeout(()=>finish(Error('O servidor demorou a responder. Clique em Atualizar dados.')),30000);function finish(err,val){if(done)return;done=true;clearTimeout(timer);delete window[q];s.remove();err?reject(err):resolve(val);}window[q]=obj=>obj?.erro?finish(Error(obj.erro)):finish(null,obj);s.onerror=()=>finish(Error('Falha ao acessar a API do Apps Script.'));s.src=API_URL+'?'+new URLSearchParams({action,callback:q,...fields}).toString();document.head.appendChild(s);});}
+function query(action,fields,apiUrl=API_URL){return new Promise((resolve,reject)=>{let q='jjcb_'+Date.now()+'_'+(++seq),s=document.createElement('script'),done=false;let timer=setTimeout(()=>finish(Error('O servidor demorou a responder. Clique em Atualizar dados.')),30000);function finish(err,val){if(done)return;done=true;clearTimeout(timer);delete window[q];s.remove();err?reject(err):resolve(val);}window[q]=obj=>obj?.erro?finish(Error(obj.erro)):finish(null,obj);s.onerror=()=>finish(Error('Falha ao acessar a API do Apps Script.'));s.src=apiUrl+'?'+new URLSearchParams({action,callback:q,...fields}).toString();document.head.appendChild(s);});}
 async function refresh(){const rid=++reqNum;el('main').innerHTML='<div class="loading"><span class="spinner"></span>Atualizando dados do projeto…</div>';try{let x=await query('jj_resumo',{});if(rid!==reqNum)return;D=x;if(!Array.isArray(D.turmas)||!Array.isArray(D.fichas))throw Error('Formato inesperado da resposta.');render();}catch(err){if(rid===reqNum)error(err);}}
 function render(){if(!D)return;const fn={dashboard:dashboard,territorios:territorios,atividades:atividades,galeria:galeria,pendencias:pendencias,metas:metas,drive:drive};(fn[P.page]||dashboard)();}
 function lookup(){return new Map(D.fichas.map(f=>[f.id,f]));}
@@ -71,20 +90,134 @@ html+='<div class="section">Situações a conferir nas turmas</div><div class="p
 function metas(){let html=head('Metas e Indicadores','Quantidades pactuadas e informações registradas na planilha oficial')+statusBand();html+='<div class="grid3">'+D.metas.map(m=>'<article class="tile"><span class="pill cyan">'+esc(m.codigo)+'</span><h3>'+esc(m.descricao)+'</h3><div class="pills">'+pill('Previsto: '+(m.previsto||'Não informado'))+pill('Realizado informado: '+(m.realizado||'Não informado'))+'</div></article>').join('')+'</div>';view(html);}
 function drive(){let html=head('Pastas do Drive','Fontes originais do monitoramento, sem mover ou alterar arquivos')+statusBand();html+='<div class="panel"><h3 style="margin:0 0 10px;color:var(--navy)">Acervo oficial do projeto</h3><p class="muted">A varredura inclui as pastas de turmas, evidências extraídas e documentos em revisão. O Drive conserva as permissões originais de acesso.</p><a class="btn" target="_blank" rel="noopener noreferrer" href="'+ROOT_DRIVE+'">Abrir pasta principal no Drive ↗</a></div><div class="section">Localize a pasta pela turma</div><button class="btn soft" data-nav="galeria">Escolher território e turma →</button>';view(html);}
 function openFicha(id){let f=D.fichas.find(x=>x.id===id),t=D.turmas.find(x=>x.id===id);if(!f&&t)f={...t,total:0,fotos:0,diarios:0,ponto:0,listas:0,relatorios:0};if(!f)return;
-F={id:id,tipo:'FOTO',page:1};let title=f.turma==='SEM TURMA CONFIRMADA'?'Evidências em revisão':f.turma;el('drawerTitle').textContent=title+' · '+(f.territorio||'Território a confirmar');el('drawerSubtitle').textContent=(f.modalidade||'Modalidade a conferir')+' · '+f.id;let vals=[['Arquivos localizados',f.total],['Fotos',f.fotos],['Diários',f.diarios],['Folhas de ponto',f.ponto],['Listas',f.listas],['Relatórios',f.relatorios],['Inscrições',f.inscricoes],['Vídeos',f.videos]];
+F={id:id,tipo:'TODOS',page:1};let title=f.turma==='SEM TURMA CONFIRMADA'?'Evidências em revisão':f.turma;el('drawerTitle').textContent=title+' · '+(f.territorio||'Território a confirmar');el('drawerSubtitle').textContent=(f.modalidade||'Modalidade a conferir')+' · '+f.id;let vals=[['Arquivos localizados',f.total],['Fotos',f.fotos],['Diários',f.diarios],['Folhas de ponto',f.ponto],['Listas',f.listas],['Relatórios',f.relatorios],['Inscrições',f.inscricoes],['Vídeos',f.videos]];
 el('drawerSummary').innerHTML='<div class="eyebrow">Resumo documental · '+esc(f.id)+'</div><div class="tiny muted">'+esc(f.modalidade||'')+' · '+esc(t?.horario||'Horário não registrado')+'</div><div class="drawer-facts">'+vals.map(x=>'<div><b>'+n(x[1])+'</b><small>'+esc(x[0])+'</small></div>').join('')+'</div><div class="tip">'+(f.turma==='SEM TURMA CONFIRMADA'?'Estes documentos foram encontrados, mas ainda não é possível atribuí-los a uma turma específica.':'A localização do arquivo é uma evidência documental em conferência. Não equivale à comprovação final da execução.')+'</div>'+(f.url?'<p style="margin-bottom:0"><a class="btn soft small" href="'+validUrl(f.url)+'" rel="noopener noreferrer" target="_blank">Abrir pasta da turma no Drive ↗</a></p>':'');
 el('docTabs').innerHTML=CATEGORIES.map(([tipo,label,key])=>{let count=key?n(f[key]):null;return '<button role="tab" aria-selected="'+(F.tipo===tipo?'true':'false')+'" data-cat="'+tipo+'">'+esc(label)+(count===null?'':' · '+count)+'</button>';}).join('');el('overlay').classList.add('on');document.body.style.overflow='hidden';el('drawerTitle').focus?.();wireTabs();loadFiles();}
 function wireTabs(){document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{F.tipo=b.dataset.cat;F.page=1;wireSelectedTab();loadFiles();});}
 function wireSelectedTab(){document.querySelectorAll('[data-cat]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.cat===F.tipo)));}
-async function loadFiles(){const key=F.id+'|'+F.tipo+'|'+F.page;el('fileResult').innerHTML='<div class="loading"><span class="spinner"></span>Consultando os arquivos desta categoria…</div>';el('filePager').innerHTML='';try{const data=await query('jj_arquivos',{ficha:F.id,tipo:F.tipo,pagina:String(F.page)});if(F.id+'|'+F.tipo+'|'+F.page!==key)return;let total=n(data.totalInventariado??data.total),approved=n(data.totalAutorizado??(data.protegido?0:data.total));lastFiles=Array.isArray(data.itens)?data.itens:[];
-let line='<div class="noticebox" style="margin:0 0 13px"><strong>'+total+' arquivo(s) inventariado(s)</strong> nesta categoria. '+(data.protegido?'A consulta individual depende de autorização de publicação; os originais permanecem no Drive.':approved+' autorizado(s) para visualização pública.')+'</div>';
-if(!lastFiles.length){el('fileResult').innerHTML=line+'<div class="empty">'+(total?'Nenhum arquivo desta categoria está liberado para exibição neste site público. O inventário e a contagem permanecem disponíveis.':'Nenhum arquivo inventariado nesta categoria até o momento.')+'</div>';return;}
-let cards=lastFiles.map((a,i)=>{let isPhoto=a.tipo==='FOTO'&&/^[\w-]{8,}$/.test(a.id),thumb=isPhoto?'https://drive.google.com/thumbnail?id='+encodeURIComponent(a.id)+'&sz=w500':'';return '<article class="media"><div class="imagebox" data-preview="'+i+'">'+(thumb?'<img loading="lazy" alt="Prévia da fotografia" src="'+esc(thumb)+'" onerror="this.style.display=\'none\'">':'<span>▤</span>')+'</div><div class="media-body"><strong>'+esc(a.nome)+'</strong><small>'+esc(a.alterado||'')+' · '+esc(a.status||a.vinculo||'Verificar vínculo')+'</small><div class="actions"><button class="btn soft small" data-preview="'+i+'">Visualizar</button><a class="btn small linebtn" target="_blank" rel="noopener noreferrer" href="'+validUrl(a.url)+'">Drive ↗</a></div></div></article>';}).join('');
-el('fileResult').innerHTML=line+'<div class="medialist">'+cards+'</div>';document.querySelectorAll('[data-preview]').forEach(b=>b.onclick=()=>openPreview(n(b.dataset.preview)));
-let pages=n(data.paginas)||1;el('filePager').innerHTML='<span class="tiny muted">Página '+F.page+' de '+pages+' · '+approved+' arquivo(s) autorizado(s)</span><div class="pills"><button class="btn small linebtn" id="pagePrev" '+(F.page<=1?'disabled':'')+'>Anterior</button><button class="btn small" id="pageNext" '+(F.page>=pages?'disabled':'')+'>Próxima</button></div>';el('pagePrev').onclick=()=>{F.page--;loadFiles();};el('pageNext').onclick=()=>{F.page++;loadFiles();};
-}catch(err){if(F.id+'|'+F.tipo+'|'+F.page===key)el('fileResult').innerHTML='<div class="warn">Não foi possível carregar os arquivos: '+esc(err.message)+'</div>';}}
+function jjAcessoDocumentalHtml(){
+ const ficha=D.fichas.find(x=>x.id===F.id)||{};
+ const turma=D.turmas.find(x=>x.id===F.id)||{};
+ const link=validUrl(ficha.url||turma.url||'');
+ const total=n(ficha.total), fotos=n(ficha.fotos), videos=n(ficha.videos);
+ const documentos=Math.max(0,total-fotos-videos);
+ const names={'DIARIO_DE_CLASSE':'Diários de classe','FOLHA_DE_PONTO':'Folhas de ponto',
+ 'LISTA_PRESENCA':'Listas de presença','LISTA_DE_INSCRITOS':'Listas de inscritos',
+ 'FICHA_INSCRICAO':'Fichas de inscrição','RELATORIO':'Relatórios','DECLARACAO':'Declarações',
+ 'CERTIFICADO':'Certificados','TERMO':'Termos','OUTRO_DOCUMENTO':'Outros documentos',
+ 'TIPO_NAO_IDENTIFICADO':'Não identificados','OUTRO':'Outras evidências'};
+ const all=F.tipo==='TODOS';
+ const label=all?'Documentos e registros da turma':(names[F.tipo]||'Evidências documentais');
+ let count='';
+ if(all)count=documentos+' arquivo(s) documentais inventariados nesta ficha';
+ else if(F.tipo==='DIARIO_DE_CLASSE')count=n(ficha.diarios)+' diário(s) cadastrado(s)';
+ else if(F.tipo==='FOLHA_DE_PONTO')count=n(ficha.ponto)+' folha(s) de ponto cadastrada(s)';
+ else if(F.tipo==='LISTA_PRESENCA')count=n(ficha.listas)+' lista(s) registrada(s)';
+ else if(F.tipo==='RELATORIO')count=n(ficha.relatorios)+' relatório(s) cadastrado(s)';
+ else if(F.tipo==='FICHA_INSCRICAO')count=n(ficha.inscricoes)+' inscrição(ões) cadastrado(s)';
+ else count='Arquivos e classificação disponíveis na pasta de evidências';
+ return '<section class="jj-doc-access" aria-label="Acesso às evidências documentais">'+
+  '<div><div class="eyebrow">Acervo documental preservado</div><h3>'+esc(label)+'</h3><p>'+esc(count)+
+  '. Os originais estão organizados no Google Drive e não são apagados ou excluídos do inventário. '+
+  'A abertura de documentos com nomes, frequência ou assinaturas depende da permissão do Drive.</p></div>'+
+  (link?'<a class="btn gold" href="'+link+'" target="_blank" rel="noopener noreferrer">📂 Abrir evidências no Drive ↗</a>':
+   '<span class="tiny">Pasta da turma ainda sem link confirmado.</span>')+'</section>';
+}
+const JJ_DOC_LABEL={DIARIO_DE_CLASSE:'Diário de classe',FOLHA_DE_PONTO:'Folha de ponto',LISTA_PRESENCA:'Lista de presença',LISTA_DE_INSCRITOS:'Lista de inscritos',FICHA_INSCRICAO:'Ficha de inscrição',RELATORIO:'Relatório',DECLARACAO:'Declaração',CERTIFICADO:'Certificado',TERMO:'Termo',OUTRO_DOCUMENTO:'Outro documento',OUTRO:'Outro arquivo',TIPO_NAO_IDENTIFICADO:'Arquivo a conferir'};
+function jjPastaSegura(){
+ const f=D.fichas.find(x=>x.id===F.id)||{},t=D.turmas.find(x=>x.id===F.id)||{};
+ return validUrl(f.url||t.url||'');
+}
+function jjContarDocumentos(tipo){
+ const f=D.fichas.find(x=>x.id===F.id)||{};
+ const mapping={DIARIO_DE_CLASSE:'diarios',FOLHA_DE_PONTO:'ponto',LISTA_PRESENCA:'listas',FICHA_INSCRICAO:'inscricoes',RELATORIO:'relatorios'};
+ const key=mapping[tipo];
+ if(key)return n(f[key]);
+ if(tipo==='TODOS')return Math.max(0,n(f.total)-n(f.fotos)-n(f.videos));
+ return 0;
+}
+function jjMiniaturasDocumentos(items,offset=0){
+ return '<div class="jj-doc-grid">'+items.map((a,i)=>{
+  const label=JJ_DOC_LABEL[a.tipo]||'Evidência documental',idOk=/^[A-Za-z0-9_-]{10,}$/.test(a.id||'');
+  const thumb=idOk?'https://drive.google.com/thumbnail?id='+encodeURIComponent(a.id)+'&sz=w650':'';
+  return '<article class="jj-doc-card"><button class="jj-doc-preview" data-doc-preview="'+(offset+i)+'" aria-label="Visualizar '+esc(label)+'">'+
+   (thumb?'<img loading="lazy" alt="Prévia do documento" src="'+esc(thumb)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'">':'')+
+   '<span class="jj-doc-fallback" style="'+(thumb?'display:none':'')+'">▤<br>Prévia indisponível<br>Abrir documento</span>'+
+   '<span class="jj-doc-tag">'+esc(label)+'</span></button><div class="jj-doc-meta"><strong>'+esc(a.nome||label)+'</strong><small>'+esc(a.alterado||'Arquivo inventariado')+'</small>'+
+   '<div class="actions"><button class="btn soft small" data-doc-preview="'+(offset+i)+'">Visualizar</button>'+
+   '<a class="btn linebtn small" href="'+validUrl(a.url)+'" target="_blank" rel="noopener noreferrer">Original ↗</a></div></div></article>';
+ }).join('')+'</div>';
+}
+function jjDocumentoAguardandoAcesso(tipo,msg){
+ const nDocs=jjContarDocumentos(tipo),path=jjPastaSegura(),label=JJ_DOC_LABEL[tipo]||'Documentos da turma';
+ let info='<div class="jj-doc-protected"><strong>Documentos encontrados: '+nDocs+'</strong>'+esc(msg)+
+ '<p style="margin:8px 0 0">Assim como no Conexões Criativas, as prévias verdadeiras são exibidas após a autenticação do Google. Arquivos e vínculos continuam preservados.</p>'+
+ (path?'<a class="btn soft small" style="margin-top:10px" target="_blank" rel="noopener noreferrer" href="'+path+'">Abrir pasta no Drive ↗</a>':'')+'</div>';
+ if(!nDocs)return info;
+ // Cartões de categoria, sem IDs, nomes de crianças nem arquivos pessoais expostos na página pública.
+ const count=Math.min(nDocs,30);
+ let cards=Array.from({length:count},(_,i)=>'<article class="jj-doc-card"><div class="jj-doc-preview" style="cursor:default"><span class="jj-doc-fallback">▤<br>'+esc(label)+' '+(i+1)+'<br><small>Acesso Google necessário</small></span></div><div class="jj-doc-meta"><strong>'+esc(label)+' '+(i+1)+'</strong><small>Original preservado na pasta da turma</small></div></article>').join('');
+ return info+'<div class="jj-doc-grid">'+cards+'</div>'+(nDocs>count?'<p class="tiny muted">Mostrando '+count+' de '+nDocs+' registros. A consulta autenticada apresenta todos por páginas.</p>':'');
+}
+function jjWireDocs(){document.querySelectorAll('[data-doc-preview]').forEach(b=>b.onclick=()=>openPreview(n(b.dataset.docPreview)));}
+async function jjCarregarDocs(tipo,pg){
+ if(!API_DOCUMENTOS_SEGUROS || !/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(API_DOCUMENTOS_SEGUROS))
+    throw Error('A galeria documental autenticada ainda não foi conectada.');
+ return query('jj_docs',{ficha:F.id,tipo,pagina:String(pg)},API_DOCUMENTOS_SEGUROS);
+}
+async function loadFiles(){
+ const key=F.id+'|'+F.tipo+'|'+F.page;
+ el('fileResult').innerHTML='<div class="loading"><span class="spinner"></span>Consultando as evidências desta ficha…</div>';
+ el('filePager').innerHTML=''; lastFiles=[];
+ const isMedia=F.tipo==='FOTO'||F.tipo==='VIDEO';
+ const isAll=F.tipo==='TODOS';
+ if(!isMedia && !isAll){
+   try{
+     const data=await jjCarregarDocs(F.tipo,F.page);
+     if(F.id+'|'+F.tipo+'|'+F.page!==key)return;
+     lastFiles=Array.isArray(data.itens)?data.itens:[];
+     const head='<div class="noticebox"><strong>'+n(data.total)+' arquivo(s) de '+esc(JJ_DOC_LABEL[F.tipo]||'evidência')+'</strong> acessíveis à conta Google autorizada.</div>';
+     el('fileResult').innerHTML=head+(lastFiles.length?jjMiniaturasDocumentos(lastFiles):'<div class="empty">Nenhum documento localizado nesta categoria.</div>');
+     jjWireDocs();jjPagerDocs(n(data.paginas)||1);
+   }catch(err){if(F.id+'|'+F.tipo+'|'+F.page===key){el('fileResult').innerHTML=jjDocumentoAguardandoAcesso(F.tipo,err.message);}}
+   return;
+ }
+ // Fotos e vídeos aprovados permanecem visíveis publicamente; documentos são adicionados apenas quando Google autentica.
+ try{
+   const media=await query('jj_arquivos',{ficha:F.id,tipo:F.tipo,pagina:String(F.page)});
+   if(F.id+'|'+F.tipo+'|'+F.page!==key)return;
+   const publicMedia=Array.isArray(media.itens)?media.itens:[];
+   lastFiles=publicMedia;
+   const total=n(media.totalInventariado??media.total),approved=n(media.totalAutorizado??media.total);
+   let head='<div class="noticebox" style="margin:0 0 13px"><strong>'+total+' arquivo(s) inventariado(s)</strong> nesta categoria · '+approved+' autorizado(s) para exibição pública.</div>';
+   let cards=publicMedia.map((a,i)=>{let isPhoto=a.tipo==='FOTO'&&/^[\w-]{8,}$/.test(a.id),isVideo=a.tipo==='VIDEO'&&/^[\w-]{8,}$/.test(a.id),thumb=(isPhoto||isVideo)?'https://drive.google.com/thumbnail?id='+encodeURIComponent(a.id)+'&sz=w500':'';return '<article class="media"><div class="imagebox" data-preview="'+i+'">'+(thumb?'<img loading="lazy" alt="Prévia da evidência autorizada" src="'+esc(thumb)+'" onerror="this.style.display=\'none\'">':'<span>▤</span>')+(isVideo?'<span class="video-play-icon" aria-hidden="true">▶</span>':'')+'</div><div class="media-body"><strong>'+esc(a.nome)+'</strong><small>'+esc(a.alterado||'')+' · '+esc(a.status||'Autorizado')+'</small><div class="actions"><button class="btn soft small" data-preview="'+i+'">Visualizar</button><a class="btn small linebtn" target="_blank" rel="noopener noreferrer" href="'+validUrl(a.url)+'">Drive ↗</a></div></div></article>';}).join('');
+   let html=head+(cards?'<div class="medialist">'+cards+'</div>':'<div class="empty">Nenhuma mídia liberada nesta categoria.</div>');
+   if(isAll){
+     html+='<div class="section" style="margin-top:20px">Diários, listas e demais evidências documentais</div>';
+     try{
+       const docs=await jjCarregarDocs('TODOS',F.page);
+       if(F.id+'|'+F.tipo+'|'+F.page!==key)return;
+       const items=Array.isArray(docs.itens)?docs.itens:[];
+       const offset=lastFiles.length;lastFiles=lastFiles.concat(items);
+       html+='<div class="jj-doc-protected"><strong>'+n(docs.total)+' documentos</strong> Consulta autenticada. Clique na miniatura para ampliar, navegar e abrir o original.</div>'+
+            (items.length?jjMiniaturasDocumentos(items,offset):'<div class="empty">Nenhum documento adicional nesta página.</div>');
+     }catch(err){html+=jjDocumentoAguardandoAcesso('TODOS',err.message);}
+   }
+   el('fileResult').innerHTML=html;
+   document.querySelectorAll('[data-preview]').forEach(b=>b.onclick=()=>openPreview(n(b.dataset.preview)));
+   jjWireDocs();
+   // Na aba Todos, a paginação percorre mídias; a navegação por tipo permite percorrer todos os documentos.
+   const pageCount=n(media.paginas)||1;
+   el('filePager').innerHTML='<span class="tiny muted">Página '+F.page+' de '+pageCount+' · '+approved+' mídias aprovadas</span><div class="pills"><button class="btn small linebtn" id="pagePrev" '+(F.page<=1?'disabled':'')+'>Anterior</button><button class="btn small" id="pageNext" '+(F.page>=pageCount?'disabled':'')+'>Próxima</button></div>';
+   el('pagePrev').onclick=()=>{F.page--;loadFiles()};el('pageNext').onclick=()=>{F.page++;loadFiles()};
+ }catch(err){if(F.id+'|'+F.tipo+'|'+F.page===key)el('fileResult').innerHTML='<div class="warn">Não foi possível carregar as mídias: '+esc(err.message)+'</div>';}
+}
+function jjPagerDocs(pages){
+ el('filePager').innerHTML='<span class="tiny muted">Página '+F.page+' de '+pages+'</span><div class="pills"><button class="btn small linebtn" id="pagePrev" '+(F.page<=1?'disabled':'')+'>Anterior</button><button class="btn small" id="pageNext" '+(F.page>=pages?'disabled':'')+'>Próxima</button></div>';
+ el('pagePrev').onclick=()=>{F.page--;loadFiles()};el('pageNext').onclick=()=>{F.page++;loadFiles()};
+}
 function openPreview(i){previewIndex=i;showPreview();el('preview').classList.add('on');}
-function showPreview(){let a=lastFiles[previewIndex];if(!a)return;el('previewName').textContent=a.nome;el('previewPosition').textContent=(previewIndex+1)+' de '+lastFiles.length;el('previewOriginal').href=validUrl(a.url)||'#';if(a.tipo==='FOTO'){el('previewContent').innerHTML='<img alt="Fotografia da atividade" src="https://drive.google.com/thumbnail?id='+encodeURIComponent(a.id)+'&sz=w1600">';}else{el('previewContent').innerHTML='<iframe title="Documento digitalizado" referrerpolicy="strict-origin-when-cross-origin" src="https://drive.google.com/file/d/'+encodeURIComponent(a.id)+'/preview"></iframe>';}}
+function showPreview(){let a=lastFiles[previewIndex];if(!a)return;el('previewName').textContent=a.nome;el('previewPosition').textContent=(previewIndex+1)+' de '+lastFiles.length;el('previewOriginal').href=validUrl(a.url)||'#';if(a.tipo==='FOTO'){el('previewContent').innerHTML='<img alt="Fotografia da atividade" src="https://drive.google.com/thumbnail?id='+encodeURIComponent(a.id)+'&sz=w1600">';}else{el('previewContent').innerHTML='<iframe title="Vídeo ou documento autorizado" allow="autoplay; fullscreen" referrerpolicy="strict-origin-when-cross-origin" src="https://drive.google.com/file/d/'+encodeURIComponent(a.id)+'/preview"></iframe>';}}
 function closePreview(){el('preview').classList.remove('on');el('previewContent').innerHTML='';}
 function closeFicha(){closePreview();el('overlay').classList.remove('on');document.body.style.overflow='';}
 el('closeDrawer').onclick=closeFicha;el('overlay').onclick=e=>{if(e.target.id==='overlay')closeFicha();};el('closePreview').onclick=closePreview;el('previewPrev').onclick=()=>{if(previewIndex>0){previewIndex--;showPreview();}};el('previewNext').onclick=()=>{if(previewIndex<lastFiles.length-1){previewIndex++;showPreview();}};el('preview').onclick=e=>{if(e.target.id==='preview')closePreview();};document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(el('preview').classList.contains('on'))closePreview();else closeFicha();}});document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{P.territorio='';P.modalidade='';P.step=1;setPage(b.dataset.page);});refresh();
