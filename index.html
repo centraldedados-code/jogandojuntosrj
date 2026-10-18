@@ -42,7 +42,7 @@ main{max-width:1480px;margin:0 auto;padding:29px 24px 75px}.eyebrow{display:inli
 // API pública: devolve somente imagens e vídeos com autorização registrada; documentos pessoais não são publicados.
 const API_URL='https://script.google.com/macros/s/AKfycbw8n7S_EXYYJAQzWwFWED5iMRXNQ_EXJCmPBErxRmyoL7Frx0HXdQHvmowFOH112RKAdw/exec';
 const ROOT_DRIVE='https://drive.google.com/drive/folders/1bJlN6caRRxZguyAX2BmH12l18P9Y7_c8';
-const API_DOCUMENTOS_SEGUROS=''; // Cole aqui APENAS a URL da SEGUNDA implantação Google autenticada. Não use API_URL pública.
+const API_DOCUMENTOS_SEGUROS=''; // Opcional: URL da segunda implantação Google executada como leitor. A planilha define quem tem acesso; NÃO use a API pública.
 let D=null,P={page:'dashboard',step:0,territorio:'',modalidade:'',busca:'',onlyFiles:false},F={id:'',tipo:'FOTO',page:1},lastFiles=[],previewIndex=0,seq=0,reqNum=0;
 const CATEGORIES=[['TODOS','Acervo completo',null],['FOTO','Fotografias','fotos'],['DIARIO_DE_CLASSE','Diários de classe','diarios'],['FOLHA_DE_PONTO','Folhas de ponto','ponto'],['LISTA_PRESENCA','Listas de presença','listas'],['LISTA_DE_INSCRITOS','Listas de inscritos',null],['RELATORIO','Relatórios','relatorios'],['FICHA_INSCRICAO','Inscrições','inscricoes'],['VIDEO','Vídeos','videos'],['DECLARACAO','Declarações',null],['CERTIFICADO','Certificados',null],['TERMO','Termos',null],['OUTRO_DOCUMENTO','Outros documentos',null],['OUTRO','Outras evidências',null],['TIPO_NAO_IDENTIFICADO','Não identificados',null]];
 const ICONS={'Ginástica':'◈','Futebol':'⚽','Lutas':'◇','Handebol':'◉','Basquete':'◉','Vôlei':'◈','Dança de Salão':'♫'};
