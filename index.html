@@ -1,561 +1,130 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jogando Juntos pela Cidadania | Monitoramento</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jogando Juntos | Monitoramento + Galeria por atividade</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap');
-:root{
-  --az:#092040;--azs:#00B7D7;--am:#ECC203;
-  --cz:#EFF1F3;--es:#021738;--br:#FFFFFF;
-  --gv:#1A6B3C;--gvb:#ebf7eb;
-  --aw:#7A4F00;--awb:#fff8e0;
-  --rd:#8B1A1A;--rdb:#fce8e8;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Open Sans',Arial,sans-serif;background:var(--cz);color:var(--es);min-height:100vh}
-h1,h2,h3,h4{font-family:'Montserrat',Arial,sans-serif}
-
-/* SENHA */
-#pwd{position:fixed;inset:0;z-index:9999;background:var(--az);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
-#pwd.off{display:none}
-.pbox{background:var(--br);border-radius:16px;padding:36px 40px;max-width:420px;width:100%;text-align:center}
-.plogo-main{height:64px;object-fit:contain;display:block;margin:0 auto 22px}
-.pfoot-logo{height:56px;object-fit:contain;display:block;margin:28px auto 0;filter:brightness(0) invert(1);opacity:.85}
-.psub{color:var(--am);font-size:11px;font-weight:700;letter-spacing:2px;margin-bottom:6px;text-transform:uppercase;font-family:'Montserrat',sans-serif}
-.phint{font-size:12px;color:#999;margin-bottom:20px}
-.pin{width:100%;padding:12px 16px;border:2px solid #dde4ee;border-radius:10px;font-size:15px;letter-spacing:2px;font-family:'Open Sans',sans-serif;color:var(--az);outline:none;transition:border-color .2s;margin-bottom:12px}
-.pin:focus{border-color:var(--azs)}
-.pbtn{width:100%;padding:13px;background:var(--az);color:var(--am);border:none;border-radius:10px;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background .2s}
-.pbtn:hover{background:var(--azs);color:var(--br)}
-.perr{color:#cc0000;font-size:12px;margin-top:8px;min-height:18px}
-
-/* LOADING */
-#ld{display:none;position:fixed;inset:0;z-index:500;background:var(--cz);align-items:center;justify-content:center;flex-direction:column;gap:16px}
-#ld.on{display:flex}
-.spin{width:48px;height:48px;border:4px solid var(--azs);border-top-color:var(--am);border-radius:50%;animation:giro .8s linear infinite}
-@keyframes giro{to{transform:rotate(360deg)}}
-.ltxt{font-family:'Montserrat',sans-serif;font-weight:700;color:var(--az);font-size:14px}
-
-/* APP */
-#app{display:none}
-#app.on{display:block}
-
-/* HEADER */
-.hdr{background:var(--az);position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.3)}
-.hdri{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 24px;gap:16px}
-.hlogo{height:42px;object-fit:contain;background:var(--br);border-radius:8px;padding:5px 12px}
-.hdiv{width:1px;height:32px;background:rgba(255,255,255,.2)}
-.htit{color:var(--am);font-size:15px;font-weight:700;letter-spacing:.5px;font-family:'Montserrat',sans-serif}
-.hsub{color:rgba(255,255,255,.5);font-size:11px;margin-top:2px}
-.hnav{display:flex;gap:4px}
-.nbtn{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.6);font-size:11px;font-weight:700;letter-spacing:.5px;padding:8px 12px;border-radius:8px;text-transform:uppercase;transition:all .2s;font-family:'Montserrat',sans-serif}
-.nbtn:hover{color:var(--br);background:rgba(255,255,255,.1)}
-.nbtn.on{color:var(--am);background:rgba(236,194,3,.15)}
-
-.wrap{max-width:1200px;margin:0 auto;padding:24px 16px}
-.vw{display:none}
-.vw.on{display:block}
-.st{font-size:11px;font-weight:700;color:var(--az);text-transform:uppercase;letter-spacing:1.5px;margin:22px 0 12px;padding-left:10px;border-left:4px solid var(--azs);font-family:'Montserrat',sans-serif}
-
-.kpi{background:var(--az);border-radius:12px;padding:18px;text-align:center}
-.knum{color:var(--am);font-size:26px;font-weight:700;font-family:'Montserrat',sans-serif}
-.klab{color:rgba(255,255,255,.65);font-size:11px;margin-top:4px}
-
-.sbw{background:#dde4ee;border-radius:999px;overflow:hidden}
-.sb{border-radius:999px;transition:width 1.2s ease;height:100%}
-.shi{background:var(--gv)}.smid{background:var(--azs)}.slow{background:#c9940a}.scrit{background:#cc2222}
-
-.badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;font-family:'Montserrat',sans-serif}
-.bR{background:var(--gvb);color:var(--gv)}
-.bE{background:#e0f7fb;color:#006080}
-.bC{background:var(--rdb);color:var(--rd)}
-
-.card{background:var(--br);border:1.5px solid #dde4ee;border-radius:12px;padding:16px 18px}
-
-.tcard{background:var(--br);border:1.5px solid #dde4ee;border-radius:14px;padding:20px;cursor:pointer;transition:border-color .18s,transform .18s,box-shadow .18s}
-.tcard:hover{border-color:var(--azs);transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,183,215,.15)}
-.tnome{font-size:13px;font-weight:700;color:var(--az);margin-bottom:10px;font-family:'Montserrat',sans-serif}
-.tsc{font-size:30px;font-weight:700;color:var(--azs);font-family:'Montserrat',sans-serif}
-.tmeta{font-size:11px;color:#666;margin-top:2px}
-.tlink{color:var(--azs);font-size:11px;font-weight:700;margin-top:12px;display:block;font-family:'Montserrat',sans-serif}
-
-.oscard{background:var(--br);border:1.5px solid #dde4ee;border-radius:10px;padding:14px;transition:border-color .18s,box-shadow .18s}
-.oscard:hover{border-color:var(--azs);box-shadow:0 4px 12px rgba(0,183,215,.12)}
-.oscard.stR{border-left:4px solid var(--gv)}
-.oscard.stE{border-left:4px solid #006080}
-.oscard.stC{border-left:4px solid var(--rd)}
-.osnome{font-size:12px;font-weight:700;color:var(--az);font-family:'Montserrat',sans-serif}
-.osfase{font-size:10px;color:#999;margin:3px 0 8px}
-.oslink{font-size:11px;color:var(--azs);font-weight:700;margin-top:8px;display:block;text-decoration:none}
-.obs-alerta{font-size:10.5px;color:var(--aw);background:var(--awb);border-radius:6px;padding:6px 10px;margin-top:8px}
-
-.tbl{width:100%;border-collapse:collapse;font-size:12px}
-.tbl th{background:var(--az);color:var(--br);padding:10px 12px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;font-family:'Montserrat',sans-serif}
-.tbl td{padding:10px 12px;border-bottom:1px solid #eee;vertical-align:middle}
-.tbl tr:hover td{background:#f8fafc}
-.tbl a{color:var(--azs);text-decoration:none;font-weight:700}
-.tbl a:hover{text-decoration:underline}
-
-.abox{background:#e0f7fb;border:1px solid #b8ecf5;border-radius:10px;padding:14px 18px;margin-bottom:12px}
-.atit{font-weight:700;color:#006080;font-size:13px;margin-bottom:4px;font-family:'Montserrat',sans-serif}
-
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-
-.back{background:none;border:2px solid var(--az);color:var(--az);font-size:11px;font-weight:700;letter-spacing:.5px;padding:8px 16px;border-radius:8px;cursor:pointer;text-transform:uppercase;transition:all .2s;margin-bottom:20px;font-family:'Montserrat',sans-serif}
-.back:hover{background:var(--az);color:var(--br)}
-
-.busca{width:100%;padding:12px 14px;border-radius:8px;border:1.5px solid #ddd;font-size:14px;margin-bottom:18px;font-family:'Open Sans',sans-serif}
-
-.pcard{background:var(--br);border:1.5px solid #dde4ee;border-radius:12px;padding:16px 18px;transition:border-color .18s,transform .18s,box-shadow .18s;display:flex;flex-direction:column;gap:8px}
-.pcard:hover{border-color:var(--azs);transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,183,215,.14)}
-.pcard.stR{border-left:4px solid var(--gv)}
-.pcard.stE{border-left:4px solid #006080}
-.pcard.stC{border-left:4px solid var(--rd)}
-.pcard-os{font-size:12px;font-weight:700;color:var(--az);font-family:'Montserrat',sans-serif}
-.pcard-ativ{font-size:10px;color:#999}
-.pcard-btn{display:inline-block;background:var(--az);color:var(--am);font-size:10px;font-weight:700;letter-spacing:.5px;padding:7px 14px;border-radius:8px;text-decoration:none;text-align:center;font-family:'Montserrat',sans-serif;transition:background .18s;margin-top:4px}
-.pcard-btn:hover{background:var(--azs);color:var(--br)}
-.pcard-btn.vazia{background:#dde4ee;color:#999;cursor:default;pointer-events:none}
-.pterr-grupo{margin-bottom:28px}
-.pterr-nome{font-size:13px;font-weight:700;color:var(--br);background:var(--az);padding:10px 16px;border-radius:10px 10px 0 0;font-family:'Montserrat',sans-serif;letter-spacing:.3px}
-.pterr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:var(--br);border:1.5px solid #dde4ee;border-top:none;border-radius:0 0 10px 10px;padding:14px}
-@media(max-width:900px){.pterr-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:600px){.pterr-grid{grid-template-columns:repeat(2,1fr)}}
-
-.foot{background:var(--az);border-radius:12px;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;margin-top:32px;flex-wrap:wrap;gap:10px}
-.ftxt{color:rgba(255,255,255,.45);font-size:11px}
-.fbadge{background:var(--am);color:var(--az);font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;font-family:'Montserrat',sans-serif}
-
-@media(max-width:900px){.g4,.g3{grid-template-columns:repeat(2,1fr)}.hnav{display:none}}
-@media(max-width:480px){.g4,.g3{grid-template-columns:1fr}}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap');
+:root{--az:#092040;--az2:#021738;--c:#00B7D7;--gold:#ECC203;--bg:#EFF1F3;--p:#fff;--ink:#152638;--soft:#5c6a78;--stroke:#dbe2e9;--green:#197749;--amber:#946200}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:'Open Sans',Arial,sans-serif;font-size:13px}button,input,select{font:inherit}button{cursor:pointer}h1,h2,h3{font-family:Montserrat,Arial,sans-serif;margin:0}a{color:#006d8a}.top{background:var(--az);color:#fff;box-shadow:0 4px 16px #00182724}.top-inner{max-width:1370px;margin:auto;padding:14px 20px;display:flex;align-items:center;gap:15px;justify-content:space-between;flex-wrap:wrap}.identity{display:flex;align-items:center;gap:13px}.brand-box{width:45px;height:45px;display:grid;place-items:center;background:var(--gold);color:var(--az);border-radius:12px;font:800 22px Montserrat}.brand-logos{display:flex;align-items:center;gap:8px;flex-shrink:0}.brand-logos img{max-width:124px;height:50px;object-fit:contain;background:white;border-radius:8px;padding:5px 9px}.brand-logos .logo-project{max-width:112px}.brand-logos .logo-institute{max-width:125px}.name{font:800 15px Montserrat;color:var(--gold);letter-spacing:.6px}.subtitle{color:#b3c8d8;font-size:11px;margin-top:4px}.nav{display:flex;gap:3px;max-width:100%;overflow:auto}.nav button{border:0;background:transparent;color:#bacbda;border-radius:8px;padding:10px 12px;white-space:nowrap;font:700 11px Montserrat}.nav button:hover,.nav button.on{color:var(--gold);background:#ffffff13}.wrap{max-width:1370px;margin:0 auto;padding:25px 20px 60px}.heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}.heading h1{font-size:23px;color:var(--az)}.heading p{font-size:12px;color:var(--soft);margin:5px 0}.secondary{color:var(--soft)}.tiny{font-size:11px}.view{display:none}.view.on{display:block}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.kpi{background:var(--az);border-radius:13px;padding:20px;min-height:115px}.kpi strong{display:block;font:800 30px Montserrat;color:var(--gold);margin-bottom:10px}.kpi span{color:#b8c6d3;font-size:12px}.section-title{font:800 11px Montserrat;letter-spacing:1.2px;color:var(--az);text-transform:uppercase;border-left:4px solid var(--c);padding-left:10px;margin:25px 0 13px}.card{background:#fff;border:1px solid var(--stroke);border-radius:12px;padding:17px;box-shadow:0 3px 10px #09204007}.notice{padding:14px 17px;border-radius:10px;background:#e8f8fc;border:1px solid #c8eff7;color:#1a556c;line-height:1.6}.warn{background:#fff7e4;border:1px solid #f2e2b2;color:#795516}.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}.controls select,.controls input{border:1px solid #cbd6df;background:#fff;color:var(--ink);border-radius:9px;padding:10px 12px;min-height:38px;min-width:170px;max-width:100%}.controls input{flex:1;min-width:170px}.btn{border:none;background:var(--az);color:var(--gold);border-radius:8px;padding:10px 14px;font:700 11px Montserrat;cursor:pointer}.btn:hover{background:#036f87;color:white}.btn.secondary{background:#f0f5f8;color:var(--az);border:1px solid var(--stroke)}.btn:disabled{opacity:.35;cursor:not-allowed}.pill{font:700 10px Montserrat;padding:4px 9px;background:#edf2f7;color:#315066;border-radius:99px;display:inline-block}.pill.ok{color:#206344;background:#e7f6ed}.pill.attn{color:#8a6000;background:#fff5d9}.pill.danger{color:#a22f30;background:#ffeaea}.table-wrap{overflow-x:auto}.tbl{width:100%;border-collapse:collapse;font-size:12px}.tbl th{background:var(--az);color:#fff;text-align:left;font:700 10px Montserrat;text-transform:uppercase;padding:12px;white-space:nowrap}.tbl td{padding:12px;border-bottom:1px solid #e8edf0;vertical-align:middle}.tbl tbody tr:hover{background:#f8fbfc}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.item{background:white;border:1px solid var(--stroke);border-radius:11px;padding:15px;transition:transform .14s,border .14s}.item:hover{transform:translateY(-2px);border-color:var(--c)}.item h3{font-size:13px;color:var(--az);line-height:1.4;margin:8px 0}.item .caption{font-size:11px;color:var(--soft);line-height:1.6}.counts{display:flex;gap:5px;flex-wrap:wrap;margin:10px 0}.counts span{padding:4px 7px;background:#edf4f8;color:var(--az);border-radius:6px;font-size:10px;font-weight:bold}.item .btn{margin-top:6px}.filters-title{font:700 12px Montserrat;color:var(--az);margin-bottom:8px}.empty{padding:35px;text-align:center;color:var(--soft);border:1px dashed #cbd3de;background:#fff;border-radius:12px}.statusline{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:14px 16px;margin-bottom:20px;border:1px solid var(--stroke);background:#fff;border-radius:12px}.line{height:8px;border-radius:20px;background:#dce4ec;overflow:hidden}.progress{height:100%;background:var(--c)}.modal{position:fixed;inset:0;background:#051d33b8;z-index:900;display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:4vh 15px}.modal.on{display:flex}.modal-box{width:min(1180px,100%);background:var(--bg);border-radius:16px;overflow:hidden;box-shadow:0 20px 70px #0007}.modal-head{background:var(--az);color:white;padding:20px;display:flex;justify-content:space-between;align-items:center;gap:12px}.modal-head h2{font-size:16px;color:var(--gold);margin-bottom:5px}.modal-head small{color:#acc5d5}.x{background:transparent;border:0;color:white;font-size:25px;cursor:pointer}.modal-body{padding:18px}.subtabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:15px}.subtabs button{border:1px solid #cedbe4;background:#fff;border-radius:9px;padding:9px 12px;color:var(--az);font:700 10px Montserrat}.subtabs button.on{background:var(--az);color:var(--gold)}.media-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}.media{background:white;border:1px solid #dfe6ee;border-radius:10px;overflow:hidden}.media .preview{height:145px;background:#e7eef3;display:grid;place-items:center;position:relative;cursor:pointer}.preview img{width:100%;height:100%;object-fit:cover}.preview .file-icon{font:800 38px Montserrat;color:var(--az)}.media .body{padding:10px;overflow:hidden}.media .fname{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11px;color:var(--az)}.media .detail{font-size:10px;color:var(--soft);margin:6px 0;overflow-wrap:anywhere}.media a{font-size:10px;margin-right:8px}.pager{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:17px}.preview-layer{position:fixed;inset:0;background:#071624ec;z-index:2000;display:none;flex-direction:column;padding:15px;align-items:center}.preview-layer.on{display:flex}.preview-layer .preview-nav{width:min(1100px,100%);display:flex;justify-content:space-between;align-items:center;color:white;gap:10px;margin-bottom:10px}.preview-layer iframe{width:min(1100px,100%);height:85vh;border:0;border-radius:10px;background:white}.preview-layer img{max-height:85vh;max-width:100%;object-fit:contain}.spin{margin:50px auto;width:38px;height:38px;border:4px solid #d5ebef;border-top-color:var(--c);border-radius:50%;animation:rotate .7s linear infinite}@keyframes rotate{to{transform:rotate(360deg)}}.footer{margin-top:35px;background:var(--az);color:#b1c2d4;padding:15px 20px;border-radius:11px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:11px}.loading{font-size:14px;padding:65px;text-align:center;color:var(--az)}.loading .spin{margin:0 auto 16px}
+@media(max-width:1050px){.cards,.grid4,.media-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.brand-logos img{height:41px;max-width:90px;padding:4px 6px}.brand-logos .logo-project,.brand-logos .logo-institute{max-width:90px}.name{font-size:12px}.wrap{padding:16px 12px 40px}.cards,.grid3,.grid4,.media-grid{grid-template-columns:1fr}.heading h1{font-size:20px}.controls select,.controls input{min-width:100%}.modal{padding:5px}.modal-body{padding:10px}.top-inner{padding:12px}.statusline{align-items:stretch}}
 </style>
 </head>
 <body>
-
-<div id="pwd">
-  <div class="pbox">
-    <img class="plogo-main" src="assets/logo-jogando-juntos.png" alt="Jogando Juntos pela Cidadania">
-    <div class="psub">Sistema de Monitoramento Operacional</div>
-    <div class="phint">Acesso restrito - Coordenação Instituto BR Arte</div>
-    <input class="pin" type="password" id="pf" placeholder="Senha de acesso"
-           onkeydown="if(event.key==='Enter')chkPwd()">
-    <button class="pbtn" onclick="chkPwd()">ACESSAR SISTEMA</button>
-    <div class="perr" id="perr"></div>
-  </div>
-  <img class="pfoot-logo" src="assets/logo-instituto-br-arte.png" alt="Instituto BR Arte">
-</div>
-
-<div id="ld">
-  <div class="spin"></div>
-  <div class="ltxt">Carregando dados do projeto...</div>
-</div>
-
-<div id="app">
-  <header class="hdr">
-    <div class="hdri">
-      <div style="display:flex;align-items:center;gap:16px">
-        <img class="hlogo" src="assets/logo-jogando-juntos.png" alt="Jogando Juntos pela Cidadania">
-        <div class="hdiv"></div>
-        <div>
-          <div class="htit">JOGANDO JUNTOS PELA CIDADANIA</div>
-          <div class="hsub">Sistema de Monitoramento Operacional</div>
-        </div>
-      </div>
-      <nav class="hnav">
-        <button class="nbtn on" onclick="goV('dashboard')">Dashboard</button>
-        <button class="nbtn" onclick="goV('territorios')">Núcleos</button>
-        <button class="nbtn" onclick="goV('metas')">Metas</button>
-        <button class="nbtn" onclick="goV('pastas')">Pastas Drive</button>
-      </nav>
-    </div>
-  </header>
-
-  <div class="wrap">
-
-    <div class="vw on" id="vw-dashboard">
-      <div class="st">Visão Geral do Projeto</div>
-      <div class="g4" id="kpi-row" style="margin-bottom:20px"></div>
-
-      <div class="st">Índice Global de Execução</div>
-      <div class="card" style="padding:22px 26px;margin-bottom:20px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:16px;flex-wrap:wrap">
-          <div>
-            <div style="font-family:Montserrat,sans-serif;font-size:14px;font-weight:700;color:var(--az)">Jogando Juntos pela Cidadania - 16 Núcleos - 174 Turmas Confirmadas</div>
-            <div style="font-size:11px;color:#888;margin-top:3px">Percentual de turmas com as 4 evidências completas (Diário de Classe, Folha de Ponto, Fotos, Vídeos)</div>
-          </div>
-          <div id="sc-txt" style="font-family:Montserrat,sans-serif;font-size:44px;font-weight:700;color:var(--azs);white-space:nowrap">--</div>
-        </div>
-        <div class="sbw" style="height:22px"><div class="sb" id="bar-g" style="width:0%"></div></div>
-        <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:#bbb">
-          <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
-        </div>
-      </div>
-
-      <div class="st">Execução por Núcleo</div>
-      <div class="g4" id="dash-terr" style="margin-bottom:20px"></div>
-
-      <div id="dash-alertas"></div>
-    </div>
-
-    <div class="vw" id="vw-territorios">
-      <div id="tlist">
-        <div class="st">Selecione um Núcleo</div>
-        <div class="g4" id="lista-terr"></div>
-      </div>
-      <div id="tdetalhe" style="display:none">
-        <button class="back" onclick="voltarLista()">Voltar aos Núcleos</button>
-        <div id="det-content"></div>
-      </div>
-    </div>
-
-    <div class="vw" id="vw-metas">
-      <div class="st">Metas do Plano de Trabalho</div>
-      <div id="lista-metas"></div>
-    </div>
-
-    <div class="vw" id="vw-pastas">
-      <div class="st">Pastas de Evidências no Google Drive</div>
-      <div style="font-size:12px;color:#888;margin-bottom:20px">Clique em ABRIR PASTA para acessar a pasta da turma no Drive. Links preenchidos automaticamente na aba ATIVIDADES da planilha.</div>
-      <input class="busca" id="busca-pasta" placeholder="Buscar pasta por núcleo ou turma..." oninput="renderPastas()">
-      <div id="pastas-gerais"></div>
-      <div id="pastas-content"></div>
-    </div>
-
-    <div class="foot">
-      <div class="ftxt">Jogando Juntos pela Cidadania - Instituto BR Arte x Ministério do Esporte - 18 meses - 16 territórios</div>
-      <div class="fbadge">Monitoramento Operacional</div>
-    </div>
-  </div>
-</div>
-
+<header class="top"><div class="top-inner">
+<div class="identity"><div class="brand-logos"><img class="logo-project" src="assets/logo-jogando-juntos.png" alt="Logomarca do projeto Jogando Juntos pela Cidadania"><img class="logo-institute" src="assets/logo-instituto-br-arte.png" alt="Logomarca do Instituto BR Arte"></div><div><div class="name">JOGANDO JUNTOS PELA CIDADANIA</div><div class="subtitle">Sistema de Monitoramento e Prestação de Contas • Instituto BR Arte</div></div></div>
+<nav class="nav" aria-label="Menu principal">
+<button class="on" data-view="dashboard">Dashboard</button><button data-view="atividades">Atividades</button><button data-view="nucleos">Núcleos</button><button data-view="galeria">Galeria de Evidências</button><button data-view="metas">Metas</button><button data-view="pendencias">Pendências</button><button data-view="drive">Drive</button>
+</nav></div></header>
+<div class="wrap" id="main"><div class="loading"><div class="spin"></div>Conectando à planilha oficial do projeto...</div></div>
+<div class="modal" id="fichaModal" role="dialog" aria-modal="true" aria-label="Ficha de evidência"><div class="modal-box">
+<div class="modal-head"><div><h2 id="fichaTitle">Ficha de Evidência</h2><small id="fichaSub"></small></div><button class="x" id="closeFicha" title="Fechar">×</button></div>
+<div class="modal-body"><div class="notice" id="fichaInfo"></div><div class="section-title">Documentos vinculados</div><div class="subtabs" id="fichaTipos"></div><div id="listaArquivos"></div><div id="fichaPager" class="pager"></div></div></div></div>
+<div class="preview-layer" id="previewLayer"><div class="preview-nav"><span id="previewName"></span><button class="btn" id="closePreview">Fechar visualização ×</button></div><div id="previewContent"></div></div>
 <script>
-var API_URL = 'https://script.google.com/macros/s/AKfycbw8n7S_EXYYJAQzWwFWED5iMRXNQ_EXJCmPBErxRmyoL7Frx0HXdQHvmowFOH112RKAdw/exec';
-var SENHA_ACESSO = 'Brarte@2026';
-
-var STATUS_KEYS = [
-  'Status Diário de Classe', 'Status Folha de Ponto', 'Status Fotos', 'Status Vídeos'
-];
-var STATUS_LABELS = {
-  'Status Diário de Classe': 'Diário de Classe',
-  'Status Folha de Ponto': 'Folha de Ponto',
-  'Status Fotos': 'Fotos',
-  'Status Vídeos': 'Vídeos'
-};
-
-var DADOS = null;
-var TERR = [];
-
-function chkPwd() {
-  var v = document.getElementById('pf').value;
-  if (v === SENHA_ACESSO) {
-    document.getElementById('pwd').classList.add('off');
-    carregarApp();
-  } else {
-    document.getElementById('perr').textContent = 'Senha incorreta. Verifique com a coordenação.';
-    document.getElementById('pf').value = '';
+'use strict';
+var D=null,P={view:'dashboard',territorio:'',busca:'',tipo:'TODOS',somenteComArquivos:true},F={id:'',tipo:'TODOS',pagina:1},lastItems=[];
+var TIPOS=[['TODOS','Todos'],['FOTO','Fotos'],['LISTA_PRESENCA','Listas de presença'],['DIARIO_DE_CLASSE','Diários de classe'],['FOLHA_DE_PONTO','Folhas de ponto'],['RELATORIO','Relatórios'],['FICHA_INSCRICAO','Inscrições'],['VIDEO','Vídeos'],['DECLARACAO','Declarações'],['CERTIFICADO','Certificados'],['TERMO','Termos'],['OUTRO_DOCUMENTO','Outros documentos'],['TIPO_NAO_IDENTIFICADO','Não identificados'],['MATERIAL_AUXILIAR','Materiais auxiliares']];
+function e(s){return String(s==null?'':s).replace(/[&<>"']/g,function(x){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x];});}
+function low(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
+function url(u){return /^https:\/\/(drive|docs)\.google\.com\//.test(String(u||''))?e(u):'';}
+// URL do Web App existente: ao ATUALIZAR a implantação, esta URL continua igual.
+// Se criar uma NOVA implantação, substitua pela nova URL /exec.
+var API_URL='https://script.google.com/macros/s/AKfycbw8n7S_EXYYJAQzWwFWED5iMRXNQ_EXJCmPBErxRmyoL7Frx0HXdQHvmowFOH112RKAdw/exec';
+var _seq=0;
+function call(name,args,ok,err){
+  var actions={jjResumoPainel:'jj_resumo',jjArquivosDaFicha:'jj_arquivos'};
+  var action=actions[name];
+  if(!action){(err||error)('Consulta indisponível.');return;}
+  if(!/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(API_URL)){
+    (err||error)('Configure a URL /exec do Apps Script no index.html.');return;
   }
-}
-
-function carregarApp() {
-  document.getElementById('ld').classList.add('on');
-  fetch(API_URL + '?action=api')
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-      DADOS = data;
-      TERR = uniq(AT().map(function (t) { return t['Território']; })).sort();
-      document.getElementById('ld').classList.remove('on');
-      document.getElementById('app').classList.add('on');
-      renderAll();
-    })
-    .catch(function (err) {
-      document.getElementById('ld').classList.remove('on');
-      alert('Erro ao carregar dados: ' + err.message);
-    });
-}
-
-function AT() { return (DADOS && DADOS.atividades) ? DADOS.atividades : []; }
-function MT() { return (DADOS && DADOS.metas) ? DADOS.metas : []; }
-function uniq(arr) { return arr.filter(function (v, i) { return arr.indexOf(v) === i; }); }
-
-// -------------------------------------------------------------------
-// STATUS DA TURMA - Concluído só quando as 4 subpastas têm evidência.
-// Pasta vazia nunca conta como executado (regra de ouro).
-// -------------------------------------------------------------------
-function statusTurma(t) {
-  var vals = STATUS_KEYS.map(function (k) { return t[k]; });
-  var completos = vals.filter(function (v) { return v === 'Completo'; }).length;
-  if (completos === vals.length) return 'Concluído';
-  if (completos === 0) return 'Pendente';
-  return 'Em Andamento';
-}
-function statusClasse(st) {
-  if (st === 'Concluído') return 'R';
-  if (st === 'Em Andamento') return 'E';
-  return 'C';
-}
-function badgeClasse(st) { return 'b' + statusClasse(st); }
-
-function scl(n) {
-  if (n >= 75) return 'shi';
-  if (n >= 40) return 'smid';
-  if (n >= 10) return 'slow';
-  return 'scrit';
-}
-
-function turmasTerritorio(nome) {
-  return AT().filter(function (r) { return r['Território'] === nome; });
-}
-
-function scT(nome) {
-  var rows = turmasTerritorio(nome);
-  if (!rows.length) return 0;
-  var concluidas = rows.filter(function (r) { return statusTurma(r) === 'Concluído'; }).length;
-  return Math.round((concluidas / rows.length) * 100);
-}
-
-function scG() {
-  var rows = AT();
-  if (!rows.length) return 0;
-  var concluidas = rows.filter(function (r) { return statusTurma(r) === 'Concluído'; }).length;
-  return Math.round((concluidas / rows.length) * 100);
-}
-
-function encTerr(t) { return t.replace(/'/g, "\\'"); }
-
-function renderAll() {
-  renderDash();
-  renderListaT();
-  renderMetas();
-  renderPastas();
-}
-
-function kpiHtml(n, l) {
-  return '<div class="kpi"><div class="knum">' + n + '</div><div class="klab">' + l + '</div></div>';
-}
-
-// -------------------------------------------------------------------
-// DASHBOARD
-// -------------------------------------------------------------------
-function renderDash() {
-  var rows = AT();
-  var concluidas = rows.filter(function (r) { return statusTurma(r) === 'Concluído'; }).length;
-
-  document.getElementById('kpi-row').innerHTML =
-    kpiHtml(TERR.length + ' / 16', 'Núcleos com Turma Cadastrada') +
-    kpiHtml(rows.length, 'Turmas Monitoradas') +
-    kpiHtml(concluidas + ' / ' + rows.length, 'Turmas Concluídas') +
-    kpiHtml(scG() + '%', 'Execução Geral');
-
-  var sg = scG();
-  document.getElementById('sc-txt').textContent = sg + '%';
-  var bg = document.getElementById('bar-g');
-  bg.style.width = sg + '%';
-  bg.className = 'sb ' + scl(sg);
-
-  var th = '';
-  TERR.forEach(function (t, i) {
-    var sc = scT(t);
-    var rowsT = turmasTerritorio(t);
-    var concT = rowsT.filter(function (r) { return statusTurma(r) === 'Concluído'; }).length;
-    th += '<div class="tcard" onclick="goV(\'territorios\');setTimeout(function(){abrirTerr(' + i + ')},120)">';
-    th += '<div class="tnome">' + t.replace('-RJ', '') + '</div>';
-    th += '<div class="tsc">' + sc + '%</div>';
-    th += '<div class="tmeta">' + concT + ' de ' + rowsT.length + ' turmas</div>';
-    th += '<div style="margin:8px 0"><div class="sbw" style="height:8px"><div class="sb ' + scl(sc) + '" style="width:' + sc + '%"></div></div></div>';
-    th += '</div>';
-  });
-  document.getElementById('dash-terr').innerHTML = th;
-
-  var semEvidencia = rows.filter(function (r) { return statusTurma(r) === 'Pendente'; });
-  var alertasHtml = '';
-  if (semEvidencia.length > 0) {
-    alertasHtml += '<div class="st">Alertas</div>';
-    alertasHtml += '<div class="abox"><div class="atit">' + semEvidencia.length + ' turma(s) sem nenhuma evidência registrada ainda</div></div>';
-    alertasHtml += '<div class="card" style="padding:0;overflow:auto"><table class="tbl">';
-    alertasHtml += '<tr><th>Núcleo</th><th>Turma</th><th>Modalidade</th><th>Observação</th></tr>';
-    semEvidencia.slice(0, 30).forEach(function (r) {
-      alertasHtml += '<tr><td><strong>' + (r['Território'] || '-') + '</strong></td>';
-      alertasHtml += '<td>' + (r['Nome da Turma'] || '-') + '</td>';
-      alertasHtml += '<td>' + (r['Modalidade Oficial'] || '-') + '</td>';
-      alertasHtml += '<td style="font-size:11px;color:#888">' + (r['Observações'] || '-') + '</td></tr>';
-    });
-    alertasHtml += '</table></div>';
-    if (semEvidencia.length > 30) {
-      alertasHtml += '<div class="tmeta" style="margin-top:8px">Mostrando as primeiras 30 de ' + semEvidencia.length + '. Veja a lista completa na aba Núcleos.</div>';
-    }
+  var callback='jjcb_'+Date.now()+'_'+(++_seq);
+  var params=new URLSearchParams({action:action,callback:callback});
+  if(name==='jjArquivosDaFicha'){
+    params.set('ficha',args[0]||'');params.set('tipo',args[1]||'TODOS');params.set('pagina',String(args[2]||1));
   }
-  document.getElementById('dash-alertas').innerHTML = alertasHtml;
+  var script=document.createElement('script'),finished=false,timer;
+  function cleanup(){if(finished)return;finished=true;clearTimeout(timer);delete window[callback];script.remove();}
+  window[callback]=function(payload){cleanup();if(payload&&payload.erro){(err||error)(payload.erro);}else ok(payload);};
+  script.onerror=function(){cleanup();(err||error)('Falha ao consultar a API do Apps Script. Confira a implantação.');};
+  timer=setTimeout(function(){cleanup();(err||error)('A API demorou para responder. Tente Atualizar dados.');},25000);
+  script.src=API_URL+'?'+params.toString();document.head.appendChild(script);
 }
 
-// -------------------------------------------------------------------
-// LISTA DE NÚCLEOS
-// -------------------------------------------------------------------
-function renderListaT() {
-  var h = '';
-  TERR.forEach(function (t, i) {
-    var sc = scT(t);
-    var rowsT = turmasTerritorio(t);
-    var concT = rowsT.filter(function (r) { return statusTurma(r) === 'Concluído'; }).length;
-    h += '<div class="tcard" onclick="abrirTerr(' + i + ')">';
-    h += '<div class="tnome">' + t + '</div>';
-    h += '<div class="tsc">' + sc + '%</div>';
-    h += '<div class="tmeta">' + concT + ' de ' + rowsT.length + ' turmas concluídas</div>';
-    h += '<div style="margin:10px 0"><div class="sbw" style="height:8px"><div class="sb ' + scl(sc) + '" style="width:' + sc + '%"></div></div></div>';
-    h += '<div class="tlink">Ver turmas e evidências -&gt;</div>';
-    h += '</div>';
-  });
-  document.getElementById('lista-terr').innerHTML = h;
-}
-
-function voltarLista() {
-  document.getElementById('tlist').style.display = 'block';
-  document.getElementById('tdetalhe').style.display = 'none';
-}
-
-function abrirTerr(idx) {
-  document.getElementById('tlist').style.display = 'none';
-  document.getElementById('tdetalhe').style.display = 'block';
-  renderDetalhe(idx);
-}
-
-// -------------------------------------------------------------------
-// DETALHE DE NÚCLEO - turmas agrupadas por Modalidade Oficial
-// -------------------------------------------------------------------
-function renderDetalhe(idx) {
-  var nome = TERR[idx];
-  var tR = turmasTerritorio(nome);
-  var sc = scT(nome);
-  var concl = tR.filter(function (r) { return statusTurma(r) === 'Concluído'; }).length;
-  var h = '';
-
-  h += '<div class="card" style="background:var(--az);padding:22px 26px;margin-bottom:20px">';
-  h += '<div style="font-size:17px;font-weight:700;color:var(--am);font-family:Montserrat,sans-serif">' + nome + '</div>';
-  h += '<div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px">Monitoramento por modalidade</div>';
-  h += '<div style="margin-top:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">';
-  h += '<div style="font-size:40px;font-weight:700;color:var(--br);font-family:Montserrat,sans-serif">' + sc + '%</div>';
-  h += '<div style="flex:1;min-width:160px">';
-  h += '<div class="sbw" style="height:14px"><div class="sb ' + scl(sc) + '" style="width:' + sc + '%"></div></div>';
-  h += '<div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:4px">' + concl + ' de ' + tR.length + ' turmas concluídas</div>';
-  h += '</div></div></div>';
-
-  var porModalidade = {};
-  tR.forEach(function (r) {
-    var mod = r['Modalidade Oficial'] || '-';
-    if (!porModalidade[mod]) porModalidade[mod] = [];
-    porModalidade[mod].push(r);
-  });
-
-  h += '<div class="st">Turmas por Modalidade</div>';
-  Object.keys(porModalidade).sort().forEach(function (mod) {
-    var lista = porModalidade[mod];
-    var concMod = lista.filter(function (r) { return statusTurma(r) === 'Concluído'; }).length;
-    h += '<div style="margin-bottom:18px">';
-    h += '<div style="font-size:12px;font-weight:700;color:var(--az);font-family:Montserrat,sans-serif;margin-bottom:8px">' + mod + ' <span style="color:#999;font-weight:400">(' + concMod + ' de ' + lista.length + ')</span></div>';
-    h += '<div class="g3">';
-    lista.forEach(function (r) {
-      var st = statusTurma(r);
-      h += '<div class="oscard st' + statusClasse(st) + '">';
-      h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">';
-      h += '<div class="osnome">' + (r['Nome da Turma'] || '-') + '</div>';
-      h += '<span class="badge ' + badgeClasse(st) + '">' + st + '</span></div>';
-      h += '<div class="osfase">' + (r['Dias e Horário'] || '') + '</div>';
-      if (r['Link da Pasta Drive']) h += '<a class="oslink" href="' + r['Link da Pasta Drive'] + '" target="_blank">Abrir pasta no Drive</a>';
-      else h += '<div style="font-size:11px;color:#ccc;margin-top:6px">Sem link registrado</div>';
-      if (r['Observações']) h += '<div class="obs-alerta">' + r['Observações'] + '</div>';
-      h += '</div>';
-    });
-    h += '</div></div>';
-  });
-
-  document.getElementById('det-content').innerHTML = h;
-}
-
-// -------------------------------------------------------------------
-// METAS
-// -------------------------------------------------------------------
-function renderMetas() {
-  var html = MT().map(function (m) {
-    return '<div class="card" style="margin-bottom:10px">' +
-      '<div style="font-size:10px;font-weight:700;color:var(--azs);letter-spacing:1px">' + m['Código Meta'] + '</div>' +
-      '<div style="font-family:Montserrat,sans-serif;font-weight:700;font-size:14px;margin:4px 0">' + m['Descrição'] + '</div>' +
-      '<div style="display:flex;gap:18px;margin-top:6px;font-size:12px;color:#666">' +
-      '<div>Previsto: <b style="color:var(--az)">' + (m['Quantidade Prevista'] || '-') + '</b></div>' +
-      '<div>Realizado: <b style="color:var(--az)">' + (m['Quantidade Realizada'] || '-') + '</b></div>' +
-      '</div>' +
-      (m['Observação'] ? '<div style="font-size:11px;color:#999;margin-top:6px;font-style:italic">' + m['Observação'] + '</div>' : '') +
-      '</div>';
-  }).join('');
-  document.getElementById('lista-metas').innerHTML = html;
-}
-
-// -------------------------------------------------------------------
-// PASTAS DRIVE
-// -------------------------------------------------------------------
-function renderPastas() {
-  var linksGerais = [
-    ['Cards de Comunicação', DADOS.config && DADOS.config.LINK_PASTA_CARDS_COMUNICACAO],
-    ['Materiais Esportivos', DADOS.config && DADOS.config.LINK_PASTA_MATERIAIS_ESPORTIVOS],
-    ['Identidade Visual', DADOS.config && DADOS.config.LINK_PASTA_IDENTIDADE_VISUAL],
-    ['Kit Documental', DADOS.config && DADOS.config.LINK_PASTA_KIT_DOCUMENTAL]
-  ].filter(function (item) { return item[1]; });
-
-  var geraisHtml = '';
-  if (linksGerais.length) {
-    geraisHtml += '<div class="pterr-grupo"><div class="pterr-nome">Pastas Gerais do Projeto</div><div class="pterr-grid">';
-    linksGerais.forEach(function (item) {
-      geraisHtml += '<div class="pcard"><div class="pcard-os">' + item[0] + '</div>' +
-        '<a class="pcard-btn" href="' + item[1] + '" target="_blank">ABRIR PASTA</a></div>';
-    });
-    geraisHtml += '</div></div>';
-  }
-  document.getElementById('pastas-gerais').innerHTML = geraisHtml;
-
-  var filtro = (document.getElementById('busca-pasta').value || '').toLowerCase();
-  var html = '';
-
-  TERR.forEach(function (terr) {
-    var rowsT = turmasTerritorio(terr).filter(function (r) {
-      if (!filtro) return true;
-      return (terr + ' ' + r['Nome da Turma']).toLowerCase().indexOf(filtro) !== -1;
-    });
-    if (!rowsT.length) return;
-    html += '<div class="pterr-grupo">';
-    html += '<div class="pterr-nome">' + terr + ' - ' + rowsT.length + ' turmas</div>';
-    html += '<div class="pterr-grid">';
-    rowsT.forEach(function (r) {
-      var st = statusTurma(r);
-      var lk = r['Link da Pasta Drive'] || '';
-      html += '<div class="pcard st' + statusClasse(st) + '">';
-      html += '<div style="display:flex;align-items:center;justify-content:space-between;gap:4px">';
-      html += '<div class="pcard-os">' + (r['Nome da Turma'] || '-') + '</div>';
-      html += '<span class="badge ' + badgeClasse(st) + '" style="font-size:9px;padding:2px 7px">' + st + '</span>';
-      html += '</div>';
-      html += '<div class="pcard-ativ">' + (r['Modalidade Oficial'] || '-') + '</div>';
-      if (lk) {
-        html += '<a class="pcard-btn" href="' + lk + '" target="_blank">ABRIR PASTA</a>';
-      } else {
-        html += '<span class="pcard-btn vazia">SEM LINK</span>';
-      }
-      html += '</div>';
-    });
-    html += '</div></div>';
-  });
-
-  if (!html) html = '<div class="tmeta">Nenhum resultado para essa busca.</div>';
-  document.getElementById('pastas-content').innerHTML = html;
-}
-
-function goV(v) {
-  document.querySelectorAll('.vw').forEach(function (e) { e.classList.remove('on'); });
-  document.querySelectorAll('.nbtn').forEach(function (e) { e.classList.remove('on'); });
-  document.getElementById('vw-' + v).classList.add('on');
-  document.querySelectorAll('.nbtn').forEach(function (e) {
-    if ((e.getAttribute('onclick') || '').indexOf("'" + v + "'") !== -1) e.classList.add('on');
-  });
-}
+function error(err){var msg=String(err&&err.message||err);document.getElementById('main').innerHTML='<div class="notice warn">Não foi possível carregar o painel: '+e(msg)+'. Confira o acesso Google, a instalação do módulo e os registros de execução.</div>';}
+function kpi(val,label){return '<div class="kpi"><strong>'+e(val)+'</strong><span>'+e(label)+'</span></div>';}
+function tag(t,c){return '<span class="pill '+(c||'')+'">'+e(t)+'</span>';}
+function H(t,sub){return '<div class="heading"><div><h1>'+e(t)+'</h1><p>'+e(sub||'')+'</p></div><div class="tiny secondary">Atualizado: '+e(D&&D.gerado||'—')+'</div></div>';}
+function block(title,text){return '<div class="section-title">'+e(title)+'</div>'+(text||'');}
+function territories(){return [...new Set((D.turmas||[]).map(x=>x.territorio))].sort((a,b)=>a.localeCompare(b,'pt-BR'));}
+function territorySelect(id,val){return '<select id="'+id+'"><option value="">Todos os núcleos</option>'+territories().map(x=>'<option '+(x===val?'selected':'')+' value="'+e(x)+'">'+e(x)+'</option>').join('')+'</select>';}
+function records(){return (D.fichas||[]).filter(x=>(!P.territorio||x.territorio===P.territorio)&&(!P.busca||low(x.turma+' '+x.territorio+' '+x.modalidade).includes(low(P.busca)))&&(!P.somenteComArquivos||x.total>0));}
+function filaNotice(){var f=D.fila||{},pct=f.pastasTotal?Math.round(f.concluidas/f.pastasTotal*100):0;return '<div class="statusline"><div style="flex:1;min-width:240px"><strong>Inventário do Drive: '+e(f.concluidas)+' / '+e(f.pastasTotal)+' pastas concluídas</strong><div class="tiny secondary" style="margin:6px 0">'+e(f.pendentes)+' pendentes • '+e(f.erros)+' com erro de leitura. A galeria se completa à medida que a varredura avança.</div><div class="line"><div class="progress" style="width:'+pct+'%"></div></div></div><button class="btn" id="refresh">Atualizar dados</button></div>';}
+function shell(view,content){document.getElementById('main').innerHTML=content+'<footer class="footer"><span>Instituto BR Arte • Jogando Juntos pela Cidadania</span><span>Metadados e comprovação documental são conceitos diferentes. Arquivos individuais respeitam as permissões do Drive.</span></footer>';document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('on',x.dataset.view===view));var b=document.getElementById('refresh');if(b)b.onclick=refresh;}
+function refresh(){document.getElementById('main').innerHTML='<div class="loading"><div class="spin"></div>Atualizando os dados do monitoramento...</div>';call('jjResumoPainel',[],function(data){D=data;render();});}
+function render(){if(!D)return;var fn={dashboard:renderDashboard,atividades:renderAtividades,nucleos:renderNucleos,galeria:renderGaleria,metas:renderMetas,pendencias:renderPendencias,drive:renderDrive};fn[P.view]();}
+function renderDashboard(){var c=D.contadores||{},rev=D.fichas.filter(x=>x.turma==='SEM TURMA CONFIRMADA'&&x.total>0).length;
+var html=H('Visão Geral do Projeto','Execução registrada, documentação localizada e classificação de evidências')+filaNotice();
+html+='<div class="cards">'+kpi(c.nucleos,'Núcleos no planejamento')+kpi(c.turmas,'Turmas cadastradas')+kpi(c.arquivos,'Arquivos inventariados')+kpi(c.fotos,'Fotografias localizadas')+'</div>';
+html+=block('Monitoramento por dimensão','<div class="grid3">'+
+'<div class="card"><h3>Execução informada</h3><p class="tiny secondary">Situações registradas em ATIVIDADES. Sem conclusão automática a partir das fotos.</p>'+tag(D.turmas.filter(t=>t.diario==='Completo').length+' diários marcados completos')+'</div>'+
+'<div class="card"><h3>Comprovação documental</h3><p class="tiny secondary">Arquivos de todos os tipos indexados na pasta do projeto e no log existente.</p>'+tag(c.listas+' lista(s) de presença')+'</div>'+
+'<div class="card"><h3>Confiabilidade dos vínculos</h3><p class="tiny secondary">Fotos e documentos sem turma inequívoca permanecem visíveis, mas separados.</p>'+tag(c.semTurma+' arquivo(s) em revisão','attn')+'</div></div>');
+html+=block('Atenção gerencial','<div class="notice warn">'+e(D.aviso)+'<br>Existem '+rev+' grupos de arquivos cuja turma ainda não foi identificada. A contagem de fotos não inclui imagens embutidas dentro de PDFs consolidados.</div>');
+shell('dashboard',html);}
+function renderAtividades(){var turmas=D.turmas.filter(t=>(!P.territorio||t.territorio===P.territorio)&&(!P.busca||low(t.turma+' '+t.territorio+' '+t.modalidade).includes(low(P.busca))));
+var cards=Object.fromEntries(D.fichas.map(x=>[x.id,x]));var html=H('Atividades e Turmas',D.turmas.length+' turmas de referência; situações declaradas na planilha não equivalem à validação de documentos')+filaNotice();
+html+='<div class="controls">'+territorySelect('filterT',P.territorio)+'<input id="searchT" placeholder="Buscar turma ou modalidade" value="'+e(P.busca)+'"></div>';
+html+='<div class="card table-wrap" style="padding:0"><table class="tbl"><thead><tr><th>Núcleo</th><th>Turma / modalidade</th><th>Diário</th><th>Ponto</th><th>Fotos (declarado)</th><th>Arquivos encontrados</th><th>Acesso</th></tr></thead><tbody>'+turmas.map(t=>{var f=cards[t.id]||{};return '<tr><td>'+e(t.territorio)+'</td><td><strong>'+e(t.turma)+'</strong><br><span class="tiny secondary">'+e(t.modalidade)+' · '+e(t.horario)+'</span></td><td>'+tag(t.diario||'Sem informação',t.diario==='Completo'?'ok':'attn')+'</td><td>'+tag(t.ponto||'Sem informação',t.ponto==='Completo'?'ok':'attn')+'</td><td>'+tag(t.fotos||'Sem informação',t.fotos==='Completo'?'ok':'attn')+'</td><td><strong>'+Number(f.total||0)+'</strong></td><td><button class="btn" data-ficha="'+e(t.id)+'">Ver evidências</button></td></tr>';}).join('')+'</tbody></table></div>';
+shell('atividades',html);wireFilters('filterT','searchT');wireFichas();}
+function renderNucleos(){var grouped=Object.groupBy?Object.groupBy(D.turmas,t=>t.territorio):{};if(!Object.groupBy)D.turmas.forEach(t=>(grouped[t.territorio]||(grouped[t.territorio]=[])).push(t));
+var html=H('Núcleos esportivos','Navegue por território e encontre todas as turmas')+filaNotice();
+html+=block(territories().length+' núcleos com turmas cadastradas','<div class="grid4">'+Object.keys(grouped).sort().map(n=>{var t=grouped[n],ids=new Set(t.map(x=>x.id)),f=D.fichas.filter(x=>ids.has(x.id));var total=f.reduce((a,b)=>a+b.total,0);return '<article class="item"><div class="pill">'+e(t.length)+' turmas</div><h3>'+e(n)+'</h3><div class="caption">'+total+' documento(s) inventariados nas respectivas fichas</div><button class="btn" data-nucleo="'+e(n)+'">Ver turmas e evidências</button></article>';}).join('')+'</div>');
+shell('nucleos',html);document.querySelectorAll('[data-nucleo]').forEach(b=>b.onclick=function(){P.territorio=b.dataset.nucleo;P.view='galeria';P.somenteComArquivos=false;render();});}
+function renderGaleria(){var all=records();
+var html=H('Galeria de Evidências','Fotografias, listas, relatórios e documentos, organizados por ficha de atividade')+filaNotice();if(!D.detalhesPublicados)html+='<div class="notice warn" style="margin-bottom:12px">A galeria já contabiliza os arquivos. A exibição pública de fotografias e documentos individuais permanece desativada até autorização institucional, pois o GitHub Pages não restringe visitantes.</div>';
+html+='<div class="controls">'+territorySelect('filterT',P.territorio)+'<input id="searchT" placeholder="Pesquisar turma, modalidade ou núcleo" value="'+e(P.busca)+'"><label class="tiny"><input type="checkbox" id="hasFiles" '+(P.somenteComArquivos?'checked':'')+'> Somente fichas com arquivos</label></div>';
+html+='<div class="tiny secondary" style="margin-bottom:10px">'+all.length+' ficha(s) no filtro atual. Arquivos sem turma também possuem fichas próprias de revisão.</div>';
+html+=(all.length?'<div class="grid3">'+all.map(f=>'<article class="item"><span class="pill '+(f.turma==='SEM TURMA CONFIRMADA'?'attn':'')+'">'+(f.turma==='SEM TURMA CONFIRMADA'?'Vínculo em revisão':e(f.id))+'</span><h3>'+e(f.turma)+' · '+e(f.territorio||'Território não identificado')+'</h3><div class="caption">'+e(f.modalidade||'Modalidade a confirmar')+'</div><div class="counts"><span>'+f.fotos+' fotos</span><span>'+f.listas+' listas</span><span>'+f.diarios+' diários</span><span>'+f.relatorios+' relatórios</span><span>'+f.total+' arquivos</span></div><button class="btn" data-ficha="'+e(f.id)+'">Abrir ficha</button></article>').join('')+'</div>':'<div class="empty">Nenhuma ficha corresponde a estes filtros. Verifique também a situação da varredura.</div>');
+shell('galeria',html);wireFilters('filterT','searchT');wireFichas();document.getElementById('hasFiles').onchange=ev=>{P.somenteComArquivos=ev.target.checked;render();};}
+function renderMetas(){var html=H('Metas e indicadores','Números do planejamento oficial, sem presumir metas realizadas')+filaNotice();html+=block('Metas do instrumento','<div class="grid3">'+D.metas.map(m=>'<div class="item"><span class="pill">'+e(m.codigo)+'</span><h3>'+e(m.descricao)+'</h3><p class="caption">Previsto: <strong>'+e(m.previsto||'Não quantificado')+'</strong><br>Realizado informado: <strong>'+e(m.realizado||'Não preenchido')+'</strong></p><p class="tiny secondary">'+e(m.obs||'')+'</p></div>').join('')+'</div>');shell('metas',html);}
+function renderPendencias(){var pend=[];D.turmas.forEach(t=>{var a=[];if(t.diario==='Pendente')a.push('Diário de classe');if(t.ponto==='Pendente')a.push('Folha de ponto');if(t.fotos==='Pendente')a.push('Fotografias');if(t.videos==='Pendente')a.push('Vídeos');if(a.length)pend.push({id:t.id,territorio:t.territorio,turma:t.turma,itens:a});});
+var html=H('Pendências e Verificações','Pendências informadas na planilha e documentos sem classificação definitiva')+filaNotice();
+html+='<div class="notice warn">O rótulo “Pendente” abaixo é o registro atual da planilha, não prova de que a atividade não ocorreu. Confira cada ficha e a existência de documentação física ou digital.</div>';
+html+=block('Pendências por turma','<div class="card table-wrap" style="padding:0"><table class="tbl"><tr><th>Núcleo</th><th>Turma</th><th>Itens pendentes na planilha</th><th>Consultar</th></tr>'+pend.map(t=>'<tr><td>'+e(t.territorio)+'</td><td>'+e(t.turma)+'</td><td>'+t.itens.map(x=>tag(x,'attn')).join(' ')+'</td><td><button class="btn" data-ficha="'+e(t.id)+'">Abrir ficha</button></td></tr>').join('')+'</table></div>');
+html+=block('Arquivos ainda sem turma definida','<div class="grid3">'+D.fichas.filter(x=>x.turma==='SEM TURMA CONFIRMADA'&&x.total).map(f=>'<div class="item"><h3>'+e(f.territorio||'Sem território')+'</h3><div class="counts"><span>'+f.total+' arquivos</span><span>'+f.fotos+' fotos</span></div><button class="btn" data-ficha="'+e(f.id)+'">Revisar documentos</button></div>').join('')+'</div>');
+shell('pendencias',html);wireFichas();}
+function renderDrive(){var html=H('Pastas e Estrutura do Drive','Acesso às fontes originais sem mover, renomear ou apagar arquivos')+filaNotice();html+='<div class="notice">A galeria indexa as pastas das 174 turmas, áreas de classificação/revisão e anexos consolidados encontrados durante a varredura. PDFs contendo fotografias incorporadas aparecem como PDFs; a extração de imagens internas exigiria processamento complementar.</div>';
+html+=block('Acesso à pasta raiz','<div class="card"><a href="https://drive.google.com/drive/folders/1bJlN6caRRxZguyAX2BmH12l18P9Y7_c8" target="_blank" rel="noopener" class="btn" style="display:inline-block;text-decoration:none">Abrir Drive do Jogando Juntos ↗</a></div>');
+html+=block('Pastas das turmas','<div class="controls">'+territorySelect('filterT',P.territorio)+'</div><div class="grid4">'+D.turmas.filter(t=>!P.territorio||t.territorio===P.territorio).map(t=>'<article class="item"><span class="pill">'+e(t.territorio)+'</span><h3>'+e(t.turma)+'</h3><a href="'+url(t.url)+'" target="_blank" rel="noopener">Abrir pasta original ↗</a></article>').join('')+'</div>');
+shell('drive',html);wireFilters('filterT');}
+function wireFilters(tid,qid){var s=document.getElementById(tid);if(s)s.onchange=ev=>{P.territorio=ev.target.value;render();};var q=document.getElementById(qid);if(q){q.onchange=ev=>{P.busca=ev.target.value;render();};q.onkeydown=ev=>{if(ev.key==='Enter'){P.busca=q.value;render();}};}}
+function wireFichas(){document.querySelectorAll('[data-ficha]').forEach(b=>b.onclick=()=>abrirFicha(b.dataset.ficha));}
+function abrirFicha(id){var f=D.fichas.find(x=>x.id===id),t=D.turmas.find(x=>x.id===id);if(!f&&t)f={...t,total:0,fotos:0,listas:0,relatorios:0};if(!f)return;
+F={id:id,tipo:'TODOS',pagina:1};document.getElementById('fichaModal').classList.add('on');document.getElementById('fichaTitle').textContent=f.turma+' · '+(f.territorio||'Território não identificado');document.getElementById('fichaSub').textContent='Ficha '+id+' | '+(f.modalidade||'Modalidade em revisão');
+document.getElementById('fichaInfo').innerHTML='<strong>'+e(f.total||0)+' arquivo(s) inventariado(s).</strong> '+e(f.turma==='SEM TURMA CONFIRMADA'?'Vínculo com turma pendente de validação.':'Vínculo pela estrutura de pastas; a comprovação ainda exige conferência.')+'<br><span class="tiny">'+e((t&&t.horario)||'')+'</span>'+(f.url?'<br><a href="'+url(f.url)+'" target="_blank" rel="noopener">Abrir pasta da turma ↗</a>':'');
+document.getElementById('fichaTipos').innerHTML=TIPOS.map(([v,label])=>'<button data-tipo="'+v+'" class="'+(v==='TODOS'?'on':'')+'">'+e(label)+'</button>').join('');
+document.querySelectorAll('[data-tipo]').forEach(b=>b.onclick=()=>{F.tipo=b.dataset.tipo;F.pagina=1;carregarArquivos();});carregarArquivos();}
+function carregarArquivos(){document.querySelectorAll('[data-tipo]').forEach(b=>b.classList.toggle('on',b.dataset.tipo===F.tipo));document.getElementById('listaArquivos').innerHTML='<div class="loading"><div class="spin"></div>Buscando arquivos da ficha...</div>';document.getElementById('fichaPager').innerHTML='';var requested=F.id+'|'+F.tipo+'|'+F.pagina;
+call('jjArquivosDaFicha',[F.id,F.tipo,F.pagina],function(data){if(F.id+'|'+F.tipo+'|'+F.pagina!==requested)return;lastItems=data.itens;
+if(data.protegido){document.getElementById('listaArquivos').innerHTML='<div class="notice warn">'+e(data.aviso||'Detalhes de evidências não liberados para publicação pública.')+'<p class="tiny">As contagens das fichas e os filtros continuam disponíveis no GitHub. As fotografias e os documentos individuais exigem autorização institucional para publicação aberta.</p></div>';return;}if(!data.total){document.getElementById('listaArquivos').innerHTML='<div class="empty">Não há arquivos indexados nesta categoria. A varredura pode ainda estar em andamento.</div>';return;}
+var cards=data.itens.map((a,i)=>{var img=a.tipo==='FOTO',pic=img&&/^[\w-]{8,}$/.test(a.id)?'https://drive.google.com/thumbnail?id='+encodeURIComponent(a.id)+'&sz=w400':'';
+return '<article class="media"><div class="preview" data-preview="'+i+'">'+(pic?'<img loading="lazy" src="'+e(pic)+'" alt="Prévia de '+e(a.nome)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><span class="file-icon" style="display:none">◫</span>':'<span class="file-icon">'+(a.tipo==='VIDEO'?'▶':'▣')+'</span>')+'</div><div class="body"><div class="fname" title="'+e(a.nome)+'">'+e(a.nome)+'</div><div class="detail">'+e(a.tipo.replaceAll('_',' '))+'<br>'+e(a.status||a.vinculo||'Conferência documental pendente')+'<br>'+e(a.alterado?'Arquivo alterado: '+a.alterado:'')+'</div><a href="'+url(a.url)+'" target="_blank" rel="noopener">Abrir no Drive ↗</a> <a href="'+url(a.pastaUrl)+'" target="_blank" rel="noopener">Pasta ↗</a></div></article>';}).join('');
+document.getElementById('listaArquivos').innerHTML='<div class="media-grid">'+cards+'</div>';
+document.querySelectorAll('[data-preview]').forEach(x=>x.onclick=()=>abrirPreview(Number(x.dataset.preview)));
+document.getElementById('fichaPager').innerHTML='<span class="tiny secondary">'+data.total+' arquivo(s) · Página '+data.pagina+' de '+data.paginas+'</span><div><button class="btn secondary" id="prev" '+(data.pagina<=1?'disabled':'')+'>Anterior</button> <button class="btn" id="next" '+(data.pagina>=data.paginas?'disabled':'')+'>Próxima</button></div>';
+document.getElementById('prev').onclick=()=>{if(F.pagina>1){F.pagina--;carregarArquivos();}};document.getElementById('next').onclick=()=>{if(F.pagina<data.paginas){F.pagina++;carregarArquivos();}};
+},function(er){document.getElementById('listaArquivos').innerHTML='<div class="notice warn">Erro na consulta: '+e(er&&er.message||er)+'</div>';});}
+function abrirPreview(idx){var a=lastItems[idx];if(!a)return;var img=a.tipo==='FOTO',id=a.id;if(!/^[\w-]{8,}$/.test(id))return;
+document.getElementById('previewName').textContent=a.nome;document.getElementById('previewContent').innerHTML=img?'<img alt="'+e(a.nome)+'" src="https://drive.google.com/thumbnail?id='+encodeURIComponent(id)+'&sz=w1600">':'<iframe title="Visualização de documento" allowfullscreen src="https://drive.google.com/file/d/'+encodeURIComponent(id)+'/preview"></iframe>';
+document.getElementById('previewLayer').classList.add('on');}
+function fecharPreview(){document.getElementById('previewLayer').classList.remove('on');document.getElementById('previewContent').innerHTML='';}
+function fecharFicha(){fecharPreview();document.getElementById('fichaModal').classList.remove('on');}
+document.getElementById('closeFicha').onclick=fecharFicha;document.getElementById('closePreview').onclick=fecharPreview;
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape'){fecharPreview();fecharFicha();}});
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{P.view=b.dataset.view;P.busca='';P.territorio='';render();window.scrollTo(0,0);});
+refresh();
 </script>
 </body>
 </html>
