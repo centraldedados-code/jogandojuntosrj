@@ -186,10 +186,10 @@ function jjDocumentoAguardandoAcesso(tipo,msg){
  const count=jjContarDocumentos(tipo),name=JJ_DOC_LABEL[tipo]||'Documentos desta ficha',url=jjDocViewUrl(tipo,F.page);
  if(url){
    return '<section class="jj-doc-auth"><strong>'+count+' registro(s) de '+esc(name)+'</strong>'+ 
-   '<p>Miniaturas e documentos originais no visor Google autenticado. Se a janela interna pedir login ou não carregar, use <b>Abrir visor em outra guia</b>.</p>'+ 
-   '<div class="actions"><a class="btn gold small" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Abrir visor completo em outra guia ↗</a>'+ 
+   '<p>O Google pode bloquear o visor autenticado quando ele é incorporado dentro do GitHub. Para ver as <b>miniaturas reais, ampliar e abrir cada documento</b>, use o botão abaixo. A consulta acontece na sua conta Google autorizada, sem expor o conteúdo neste site público.</p>'+ 
+   '<div class="actions"><a class="btn gold small" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Abrir miniaturas e documentos em nova guia ↗</a>'+ 
    '<button class="btn soft small" data-jj-share>Copiar link com acesso ao visor</button></div>'+ 
-   '<iframe class="jj-doc-frame" loading="lazy" title="Visor institucional de '+esc(name)+'" src="'+esc(url)+'"></iframe></section>';
+   '<p class="tiny muted" style="margin:16px 0 0">Caso apareça “Acesso institucional necessário”, confira a conta Google selecionada nessa nova guia. As autorizações são verificadas pelo Apps Script.</p></section>';
  }
  return '<section class="jj-doc-auth"><strong>'+count+' registro(s) de '+esc(name)+'</strong>'+ 
  '<p>Os documentos continuam no Drive. Para mostrar miniaturas reais e ampliar páginas com dados pessoais, conecte o endereço da implantação Google <b>Executar como: usuário que acessa</b>, após implantá-la.</p>'+ 
