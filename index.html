@@ -93,7 +93,7 @@ main{max-width:1480px;margin:0 auto;padding:29px 24px 75px}.eyebrow{display:inli
 <body>
 <header><div class="headinner"><div class="brand"><div class="logos"><img src="assets/logo-jogando-juntos.png" alt="Logomarca Jogando Juntos pela Cidadania"><img src="assets/logo-instituto-br-arte.png" alt="Logomarca Instituto BR Arte"></div><div><h1>JOGANDO JUNTOS PELA CIDADANIA</h1><p>Central de Monitoramento e Evidências · Instituto BR Arte</p></div></div><nav class="topnav" aria-label="Navegação principal"><button data-page="dashboard" aria-current="page">Dashboard</button><button data-page="territorios">Territórios</button><button data-page="atividades">Turmas</button><button data-page="galeria">Galeria e Fichas</button><button data-page="pendencias">Pendências</button><button data-page="metas">Metas</button><button data-page="drive">Drive</button></nav></div></header>
 <main><div class="content" id="main"><div class="loading"><span class="spinner"></span>Consultando planilha de conformidade…</div></div></main>
-<div id="overlay" role="presentation"><aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle"><div class="drawer-top"><div><span class="eyebrow">Ficha individual da evidência · SMPC</span><h2 class="drawer-title" id="drawerTitle">Ficha</h2><div class="tiny muted" id="drawerSubtitle"></div></div><button class="closer" id="closeDrawer" aria-label="Fechar ficha">Fechar ×</button></div><div class="drawer-main"><div class="drawer-summary" id="drawerSummary"></div><div class="section">Arquivos por tipo de comprovação</div><div id="docTabs" class="document-tabs" role="tablist"></div><div id="fileResult" aria-live="polite"></div><div id="filePager" class="pager"></div></div></aside></div>
+<div id="overlay" role="presentation"><aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle"><div class="drawer-top"><div><span class="eyebrow">Ficha individual da evidência · SMPC</span><h2 class="drawer-title" id="drawerTitle">Ficha</h2><div class="tiny muted" id="drawerSubtitle"></div></div><button class="closer" id="closeDrawer" aria-label="Fechar ficha">Fechar ×</button></div><div class="drawer-main"><div class="drawer-summary" id="drawerSummary"></div><div class="section">Arquivos por tipo de comprovação</div><p class="tiny muted" style="margin:0 0 12px">Fotos e vídeos aprovados aparecem publicamente. Diários, listas, folhas de ponto e outros documentos aparecem nesta galeria para contas institucionais autorizadas; a abertura poderá pedir uma autorização Google inicial.</p><div id="docTabs" class="document-tabs" role="tablist"></div><div id="fileResult" aria-live="polite"></div><div id="filePager" class="pager"></div></div></aside></div>
 <div id="preview" role="dialog" aria-modal="true" aria-label="Visualização da evidência"><div class="previewbox"><div class="previewbar"><strong id="previewName">Arquivo</strong><button class="closer" id="closePreview">Fechar ×</button></div><div class="previewcontent" id="previewContent"></div><div class="previewfoot"><span class="tiny muted" id="previewPosition"></span><div class="pills"><button class="btn small linebtn" id="previewPrev">← Anterior</button><a class="btn small" id="previewOriginal" target="_blank" rel="noopener noreferrer">Abrir original no Drive ↗</a><button class="btn small linebtn" id="previewNext">Próximo →</button></div></div></div></div>
 <script>
  'use strict';
@@ -218,7 +218,7 @@ function dashboard(){
  jj25Bar('Sem arquivo localizado',missing,totalTurmas,'Quantidade de turmas com ficha vazia','gold')+'</section>';
  html+='</div>';
  html+=jj25Section('Situação por território');
- html+='<div class="jj25-territories">'+areasList.map(area=>{const turmas=D.turmas.filter(t=>t.territorio===area), fs=turmas.map(t=>map.get(t.id)||{}),tot=sum(fs,'total'),fot=sum(fs,'fotos'),dia=sum(fs,'diarios'),valid=fs.filter(f=>n(f.total)>0).length,pct=jjPct(valid,turmas.length),review=otherReview(area).reduce((k,x)=>k+n(x.total),0);return '<button data-jj-area="'+esc(area)+'"><div class="jj25-territory-title"><strong>'+esc(area)+'</strong><b>'+pct+'%</b></div><small>Turmas com arquivos identificados</small><div class="jj25-three"><span><b>'+turmas.length+'</b><small>TURMAS</small></span><span><b>'+jjFmt(fot)+'</b><small>FOTOS</small></span><span><b>'+jjFmt(dia)+'</b><small>DIÁRIOS</small></span></div><div class="jj25-bar-track"><span style="width:'+pct+'%"></span></div><small>'+jjFmt(tot)+' arquivos na turma'+(review?' · '+jjFmt(review)+' em revisão':'')+'</small></button>';}).join('')+'</div>';
+ html+='<div class="jj25-territories">'+areasList.map(area=>{const turmas=D.turmas.filter(t=>t.territorio===area), fs=turmas.map(t=>map.get(t.id)||{}),tot=sum(fs,'total'),fot=sum(fs,'fotos'),dia=sum(fs,'diarios'),valid=fs.filter(f=>n(f.total)>0).length,pct=jjPct(valid,turmas.length),review=otherReview(area).reduce((k,x)=>k+n(x.total),0);return '<button data-jj-area="'+esc(area)+'"><div class="jj25-territory-title"><strong>'+esc(area)+'</strong><b>'+valid+'/'+turmas.length+'</b></div><small>Turmas com algum arquivo vinculado · não é completude</small><div class="jj25-three"><span><b>'+turmas.length+'</b><small>TURMAS</small></span><span><b>'+jjFmt(fot)+'</b><small>FOTOS</small></span><span><b>'+jjFmt(dia)+'</b><small>DIÁRIOS</small></span></div><div class="jj25-bar-track"><span style="width:'+pct+'%"></span></div><small>'+jjFmt(tot)+' arquivos na turma'+(review?' · '+jjFmt(review)+' em revisão':'')+'</small></button>';}).join('')+'</div>';
  html+='<div class="jj25-two">';
  const priority=a.casos.divergencia.slice(0,6).concat(a.casos.encontrado.slice(0,Math.max(0,6-a.casos.divergencia.length)));
  html+='<section class="jj25-panel"><h3>O que precisa ser resolvido primeiro</h3><p class="jj25-muted">Itens com diferenças entre a planilha e as fichas de inventário.</p><div class="jj25-priority">'+(priority.length?priority.map((x,i)=>'<button data-open="'+esc(x.t.id)+'"><b>'+(i+1)+'</b><span><strong>'+esc(x.t.territorio)+' · '+esc(x.t.turma)+'</strong><small>'+esc(x.label)+' — '+esc(x.desc)+'</small></span><em>Abrir ficha →</em></button>').join(''):'<p>Sem divergências neste conjunto de dados.</p>')+'</div></section>';
@@ -352,7 +352,7 @@ function jjDocumentoAguardandoAcesso(tipo,msg){
  const count=jjContarDocumentos(tipo),name=JJ_DOC_LABEL[tipo]||'Documentos desta ficha',url=jjDocViewUrl(tipo,F.page);
  if(url){
    return '<section class="jj-doc-auth"><strong>'+count+' registro(s) de '+esc(name)+'</strong>'+ 
-   '<p>O Google pode bloquear o visor autenticado quando ele é incorporado dentro do GitHub. Para ver as <b>miniaturas reais, ampliar e abrir cada documento</b>, use o botão abaixo. A consulta acontece na sua conta Google autorizada, sem expor o conteúdo neste site público.</p>'+ 
+   '<p>Não foi possível carregar esta categoria diretamente na ficha. Isso pode acontecer se o navegador bloquear cookies do Google em outros sites ou se sua conta não estiver autorizada. Os arquivos <b>continuam inventariados</b>. Use o visor institucional abaixo para ver miniaturas, ampliar e abrir os originais.</p>'+ 
    '<div class="actions"><a class="btn gold small" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Abrir miniaturas e documentos em nova guia ↗</a>'+ 
    '<button class="btn soft small" data-jj-share>Copiar link com acesso ao visor</button></div>'+ 
    '<p class="tiny muted" style="margin:16px 0 0">Caso apareça “Acesso institucional necessário”, confira a conta Google selecionada nessa nova guia. As autorizações são verificadas pelo Apps Script.</p></section>';
@@ -372,7 +372,13 @@ document.addEventListener('click',e=>{
  if(e.target.closest('[data-jj-share]')){const u=jjDocUrlConfigurada();if(u){const link=location.origin+location.pathname+'?docs='+encodeURIComponent(u);navigator.clipboard?.writeText(link).then(()=>alert('Link copiado: compartilhe apenas com profissionais autorizados.')).catch(()=>prompt('Copie o link:',link));}}
 });
 function jjWireDocs(){document.querySelectorAll('[data-doc-preview]').forEach(b=>b.onclick=()=>openPreview(n(b.dataset.docPreview)));}
-async function jjCarregarDocs(tipo,pagina){throw Error('Os documentos completos são consultados no visor institucional Google, não na API pública.');}
+async function jjCarregarDocs(tipo,pagina){
+ const api=jjDocUrlConfigurada();
+ if(!api)throw Error('Implantação documental ainda não configurada.');
+ const result=await query('jj_docs',{ficha:F.id,tipo,pagina:String(pagina)},api);
+ if(!result||!Array.isArray(result.itens))throw Error('A consulta documental não retornou uma lista válida.');
+ return result;
+}
 async function loadFiles(){
  const key=F.id+'|'+F.tipo+'|'+F.page;
  el('fileResult').innerHTML='<div class="loading"><span class="spinner"></span>Consultando as evidências desta ficha…</div>';
@@ -384,7 +390,7 @@ async function loadFiles(){
      const data=await jjCarregarDocs(F.tipo,F.page);
      if(F.id+'|'+F.tipo+'|'+F.page!==key)return;
      lastFiles=Array.isArray(data.itens)?data.itens:[];
-     const head='<div class="noticebox"><strong>'+n(data.total)+' arquivo(s) de '+esc(JJ_DOC_LABEL[F.tipo]||'evidência')+'</strong> acessíveis à conta Google autorizada.</div>';
+     const head='<div class="noticebox" style="margin-bottom:13px"><strong>'+n(data.total)+' arquivo(s) de '+esc(JJ_DOC_LABEL[F.tipo]||'evidência')+'</strong> · Visualização institucional autenticada. Para ler todas as páginas de PDFs, abra o original no Drive.</div>';
      el('fileResult').innerHTML=head+(lastFiles.length?jjMiniaturasDocumentos(lastFiles):'<div class="empty">Nenhum documento localizado nesta categoria.</div>');
      jjWireDocs();jjPagerDocs(n(data.paginas)||1);
    }catch(err){if(F.id+'|'+F.tipo+'|'+F.page===key){el('fileResult').innerHTML=jjDocumentoAguardandoAcesso(F.tipo,err.message);}}
@@ -407,7 +413,7 @@ async function loadFiles(){
        if(F.id+'|'+F.tipo+'|'+F.page!==key)return;
        const items=Array.isArray(docs.itens)?docs.itens:[];
        const offset=lastFiles.length;lastFiles=lastFiles.concat(items);
-       html+='<div class="jj-doc-protected"><strong>'+n(docs.total)+' documentos</strong> Consulta autenticada. Clique na miniatura para ampliar, navegar e abrir o original.</div>'+
+       html+='<div class="jj-doc-protected"><strong>'+n(docs.total)+' documento(s)</strong> na ficha. Visualização institucional autenticada. Use as abas de documentos para percorrer as demais páginas. Clique na miniatura para ampliar ou abra o original.</div>'+
             (items.length?jjMiniaturasDocumentos(items,offset):'<div class="empty">Nenhum documento adicional nesta página.</div>');
      }catch(err){html+=jjDocumentoAguardandoAcesso('TODOS',err.message);}
    }
@@ -425,7 +431,22 @@ function jjPagerDocs(pages){
  el('pagePrev').onclick=()=>{F.page--;loadFiles()};el('pageNext').onclick=()=>{F.page++;loadFiles()};
 }
 function openPreview(i){previewIndex=i;showPreview();el('preview').classList.add('on');}
-function showPreview(){let a=lastFiles[previewIndex];if(!a)return;el('previewName').textContent=a.nome;el('previewPosition').textContent=(previewIndex+1)+' de '+lastFiles.length;el('previewOriginal').href=validUrl(a.url)||'#';if(a.tipo==='FOTO'){el('previewContent').innerHTML='<img alt="Fotografia da atividade" src="https://drive.google.com/thumbnail?id='+encodeURIComponent(a.id)+'&sz=w1600">';}else{el('previewContent').innerHTML='<iframe title="Vídeo ou documento autorizado" allow="autoplay; fullscreen" referrerpolicy="strict-origin-when-cross-origin" src="https://drive.google.com/file/d/'+encodeURIComponent(a.id)+'/preview"></iframe>';}}
+function showPreview(){
+ const a=lastFiles[previewIndex];if(!a)return;
+ el('previewName').textContent=a.nome||'Evidência';
+ el('previewPosition').textContent=(previewIndex+1)+' de '+lastFiles.length;
+ el('previewOriginal').href=validUrl(a.url)||'#';
+ const id=String(a.id||'');const ok=/^[\w-]{10,}$/.test(id);
+ const isVideo=a.tipo==='VIDEO';
+ if(isVideo&&ok){
+   el('previewContent').innerHTML='<iframe title="Vídeo autorizado" allow="autoplay; fullscreen" referrerpolicy="strict-origin-when-cross-origin" src="https://drive.google.com/file/d/'+encodeURIComponent(id)+'/preview"></iframe>';
+ }else if(ok){
+   const hint=a.tipo==='FOTO'?'Fotografia ampliada':'Prévia do documento. Para ler todas as páginas e assinaturas, use “Original no Drive”.';
+   el('previewContent').innerHTML='<div style="text-align:center;width:100%;padding:16px"><img alt="'+esc(hint)+'" style="max-width:100%;max-height:66vh;object-fit:contain" src="https://drive.google.com/thumbnail?id='+encodeURIComponent(id)+'&sz=w1600" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><p style="display:none;color:white">Miniatura não disponível nesta conta. Abra o arquivo pelo botão Original no Drive.</p>'+(a.tipo==='FOTO'?'':'<p style="color:white;font-size:12px">'+esc(hint)+'</p>')+'</div>';
+ }else{
+   el('previewContent').innerHTML='<p style="color:white;padding:20px">Prévia indisponível. Consulte o original no Drive.</p>';
+ }
+}
 function closePreview(){el('preview').classList.remove('on');el('previewContent').innerHTML='';}
 function closeFicha(){closePreview();el('overlay').classList.remove('on');document.body.style.overflow='';}
 el('closeDrawer').onclick=closeFicha;el('overlay').onclick=e=>{if(e.target.id==='overlay')closeFicha();};el('closePreview').onclick=closePreview;el('previewPrev').onclick=()=>{if(previewIndex>0){previewIndex--;showPreview();}};el('previewNext').onclick=()=>{if(previewIndex<lastFiles.length-1){previewIndex++;showPreview();}};el('preview').onclick=e=>{if(e.target.id==='preview')closePreview();};document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(el('preview').classList.contains('on'))closePreview();else closeFicha();}});document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{P.territorio='';P.modalidade='';P.step=1;setPage(b.dataset.page);});refresh();
